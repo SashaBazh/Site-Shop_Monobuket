@@ -75,7 +75,7 @@ const Footer: React.FC = () => {
         {/* Логотип и контакты */}
         <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           <Logo
-            src="/src/assets/images/logo2.png"
+            src="../../assets/images/logo2.png"
             alt="logo"
             onClick={() => handleNavigation("/")} // Переход на главную
           />
