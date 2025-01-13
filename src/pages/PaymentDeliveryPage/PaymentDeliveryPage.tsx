@@ -9,6 +9,10 @@ import Footer from "../../components/Footer/Footer";
 import { YMaps, Map, Placemark } from "@pbe/react-yandex-maps";
 import { keyframes } from "@mui/system";
 
+// ---------------------- Импорт изображений как переменных ----------------------
+import receiptImg from '../../assets/images/receipt.jpg';
+import paymentMethodsImg from '../../assets/images/payment_methods.jpg';
+
 // ---------------------- Анимация появления ----------------------
 const fadeIn = keyframes`
   from {
@@ -123,7 +127,7 @@ const PaymentDeliveryPage: React.FC = () => {
 
   return (
     <PageContainer>
-      {/* Первый хедер (уже содержит изменения для корзины) */}
+      {/* Первый хедер */}
       <MainHeader />
       {/* Второй хедер (SubHeader) */}
       <SubHeader />
@@ -171,7 +175,7 @@ const PaymentDeliveryPage: React.FC = () => {
               </TextSection>
             </Box>
 
-            <Image src="/src/assets/images/receipt.jpg" alt="Receipt" />
+            <Image src={receiptImg} alt="Receipt" />
           </SectionWrapper>
 
           <SectionWrapper>
@@ -208,7 +212,7 @@ const PaymentDeliveryPage: React.FC = () => {
 
           {/* Картинка с методами оплаты */}
           <PaymentMethodsImage
-            src="/src/assets/images/payment_methods.jpg"
+            src={paymentMethodsImg}
             alt="Payment Methods"
           />
 

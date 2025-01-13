@@ -19,6 +19,11 @@ import {
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
+// Импортируем изображения как переменные
+import aboutImage1 from '../../assets/images/about_image1.jpg';
+import aboutImage2 from '../../assets/images/about_image2.jpg';
+import aboutImage3 from '../../assets/images/about_image3.jpg';
+
 const AboutUsPage: React.FC = () => {
   const { ref: sectionRef1, inView: inViewSection1 } = useInView({
     triggerOnce: true, // Анимация запускается один раз, когда элемент появляется
@@ -51,7 +56,7 @@ const AboutUsPage: React.FC = () => {
             <SectionText variant="body1">
               МОНОБУКЕТ - мы создаем не просто букеты, а настоящие произведения искусства. Влюбленные в свое дело, мы знаем всё о цветах и поможем создать именно тот букет, который расскажет вашу историю. Мы живем цветами и точно знаем, как превратить любой повод в незабываемый момент с помощью идеально подобранной композиции.
             </SectionText>
-            <AboutImage src="/src/assets/images/about_image1.jpg" alt="about_image1" />
+            <AboutImage src={aboutImage1} alt="about_image1" />
           </motion.div>
         </ContentWrapper>
 
@@ -90,7 +95,7 @@ const AboutUsPage: React.FC = () => {
                 </CircleText1>
               </Grid>
             </Grid>
-            <AboutImage src="/src/assets/images/about_image2.jpg" alt="about_image2" />
+            <AboutImage src={aboutImage2} alt="about_image2" />
           </motion.div>
         </ContentWrapper>
 
@@ -104,9 +109,9 @@ const AboutUsPage: React.FC = () => {
           >
             <SectionSubtitle variant="h2">Почему именно мы</SectionSubtitle>
             <SectionText variant="body1">
-            В "Монобукете" мы уверены, что выбор букета требует такого же профессионального подхода, как и выбор автомобиля или дорогих украшений. Наши флористы-эксперты помогут вам создать именно ту цветочную композицию, которая идеально подойдет для вашего особенного случая.
+              В "Монобукете" мы уверены, что выбор букета требует такого же профессионального подхода, как и выбор автомобиля или дорогих украшений. Наши флористы-эксперты помогут вам создать именно ту цветочную композицию, которая идеально подойдет для вашего особенного случая.
             </SectionText>
-            <AboutImage1 src="/src/assets/images/about_image3.jpg" alt="about_image3" />
+            <AboutImage1 src={aboutImage3} alt="about_image3" />
           </motion.div>
         </ContentWrapper>
       </AboutContainer>

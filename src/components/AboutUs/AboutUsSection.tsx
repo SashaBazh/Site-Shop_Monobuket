@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, useMediaQuery } from '@mui/material';
 import { motion } from 'framer-motion';
+import aboutRect from '../../assets/images/about_rect.jpg'; // Импортируем изображение как переменную
 
 const AboutUsSection: React.FC = () => {
   const isMobile = useMediaQuery('(max-width:600px)');
@@ -18,36 +19,34 @@ const AboutUsSection: React.FC = () => {
         flexDirection: isMobile ? 'column' : 'row',
         gap: '40px',
         padding: isMobile ? '20px' : '100px',
-     
         backgroundColor: '#dcc7bd',
         alignItems: 'flex-start',
       }}
     >
-      <Box sx={{ flex: '1', minWidth: '300px', fontsize: "16px" }}>
+      <Box sx={{ flex: '1', minWidth: '300px', fontSize: '16px' }}>
         <Typography variant="h2" sx={{ marginBottom: '20px' }}>
           Цветочная подписка
         </Typography>
-        <Typography variant="body1" sx={{ marginBottom: '10px', fontWeight: 200, fontSize: "30px"}}>
+        <Typography variant="body1" sx={{ marginBottom: '10px', fontWeight: 200, fontSize: '30px' }}>
           Цветочная подписка – это с любовью подобранные цветы, которые станут приятным дополнением вашего интерьера.
         </Typography>
-        <Typography variant="body1" sx={{ marginBottom: '10px', fontWeight: 300, fontSize: "30px" }}>
+        <Typography variant="body1" sx={{ marginBottom: '10px', fontWeight: 300, fontSize: '30px' }}>
           Каждую неделю вас будут радовать свежие сезонные цветы, состав которых мы можем согласовать с вами.
         </Typography>
-        <Typography variant="body1" sx={{ fontWeight: 300, fontSize: "30px" }}>
+        <Typography variant="body1" sx={{ fontWeight: 300, fontSize: '30px' }}>
           Это идеальный подарок для себя или для ваших близких.
         </Typography>
       </Box>
       <Box sx={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'flex-end' }}>
         <Box
           component="img"
-          src="/src/assets/images/about_rect.jpg"
+          src={aboutRect} // Используем импортированное изображение
           alt="about-rect"
           sx={{
             width: isMobile ? '100%' : '80%',
             borderRadius: '8px',
           }}
         />
-        
       </Box>
     </Box>
   );

@@ -7,6 +7,9 @@ import Footer from '../../components/Footer/Footer';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
+// Импорт изображения как переменной
+import contactsImage from '../../assets/images/contacts_image.jpg';
+
 // Создание темы
 const theme = createTheme({
   palette: {
@@ -79,7 +82,6 @@ const ImageContainer = styled(Box)(({ theme }) => ({
   img: {
     width: '100%',
     height: 'auto',
-   
     borderRadius: '10px',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
     objectFit: 'cover', // Гарантируем, что изображение заполнит контейнер аккуратно
@@ -90,7 +92,6 @@ const ImageContainer = styled(Box)(({ theme }) => ({
     },
   },
 }));
-
 
 const MapContainer = styled(Box)(({ theme }) => ({
   width: '100%',
@@ -117,7 +118,7 @@ const StyledLink = styled(Link)(({ theme }) => ({
 }));
 
 // Анимация появления текста
-const MotionSectionText = ({ children }) => {
+const MotionSectionText = ({ children }: { children: React.ReactNode }) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -192,7 +193,7 @@ const ContactPage: React.FC = () => {
               <Grid item xs={12} md={6}>
                 <ImageContainer>
                   <motion.img
-                    src="/src/assets/images/contacts_image.jpg" // Укажите правильный путь к изображению
+                    src={contactsImage} // Используем импортированное изображение
                     alt="Контактное изображение"
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
