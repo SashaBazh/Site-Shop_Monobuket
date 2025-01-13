@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Box, IconButton, useTheme } from '@mui/material'; // Импортируем useTheme
+import { Box, useTheme } from '@mui/material'; // Импортируем useTheme
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { SliderContainer, ArrowButton } from './TopSellersSection.styles';
 
-const slides = [
-  '/src/assets/images/slider1.jpg',
-  '/src/assets/images/slider2.jpg',
-  '/src/assets/images/slider3.jpg',
-];
+// Импортируем изображения слайдов как переменные
+import slider1 from '../../assets/images/slider1.jpg';
+import slider2 from '../../assets/images/slider2.jpg';
+import slider3 from '../../assets/images/slider3.jpg';
+
+const slides = [slider1, slider2, slider3];
 
 const SliderSection: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -17,7 +18,7 @@ const SliderSection: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex === slides.length - 1 ? 0 : prevIndex + 1));
-    }, 7000); // Смену слайда делать через 3 секунды
+    }, 7000); // Смена слайда каждые 7 секунд
 
     return () => clearInterval(interval); // Очищаем интервал при размонтировании компонента
   }, []);
@@ -41,8 +42,8 @@ const SliderSection: React.FC = () => {
         <ArrowBackIosIcon />
       </ArrowButton>
 
-      <div
-        style={{
+      <Box
+        sx={{
           display: 'flex',
           transition: 'transform 0.5s ease-in-out',
           transform: `translateX(-${currentIndex * 100}%)`, // Плавный сдвиг слайдов
@@ -52,7 +53,7 @@ const SliderSection: React.FC = () => {
           <Box
             key={idx}
             component="img"
-            src={slide}
+            src={slide} // Используем импортированное изображение
             alt={`slide-${idx}`}
             sx={{
               width: '100%',
@@ -64,7 +65,7 @@ const SliderSection: React.FC = () => {
             }}
           />
         ))}
-      </div>
+      </Box>
 
       <ArrowButton
         onClick={handleNext}
