@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom"; // Используем Li
 import telegramIcon from "../../assets/icons/telegram.svg";
 import instagramIcon from "../../assets/icons/instagram.svg";
 import emailIcon from "../../assets/icons/email.svg";
+import logo2 from "../../assets/images/logo2.png"; // Импортируем логотип как переменную
 
 const FooterContainer = styled(Box)(({ theme }) => ({
   backgroundColor: "#000000", // Цвет фона
@@ -21,7 +22,7 @@ const FooterTop = styled(Box)(({ theme }) => ({
   alignItems: "flex-start",
   gap: theme.spacing(4),
   flexWrap: "wrap", // Перенос при маленьком экране
-   filter: 'invert(1)'
+  filter: 'invert(1)'
 }));
 
 const Logo = styled("img")(({ theme }) => ({
@@ -56,7 +57,7 @@ const FooterBottom = styled(Box)(({ theme }) => ({
   flexWrap: "wrap",
   fontSize: "14px",
   color: "#ccc", // Цвет текста нижней части
-   filter: 'invert(1)'
+  filter: 'invert(1)'
 }));
 
 const Footer: React.FC = () => {
@@ -75,7 +76,7 @@ const Footer: React.FC = () => {
         {/* Логотип и контакты */}
         <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           <Logo
-            src="src/assets/images/logo2.png"
+            src={logo2} // Используем импортированный логотип
             alt="logo"
             onClick={() => handleNavigation("/")} // Переход на главную
           />
