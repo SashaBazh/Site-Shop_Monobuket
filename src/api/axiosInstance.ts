@@ -4,7 +4,7 @@ import axios from "axios";
 
 // Бэкенд на http://localhost:8000
 // Если ваш бэкенд на другом URL, меняйте тут
-const BASE_URL = "http://localhost:8000/api";
+const BASE_URL = "https://course.excellentjewellery.ru/flowers/api";
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
