@@ -318,43 +318,45 @@ export default function CatalogPage() {
         >
           {/* Строка поиска */}
           <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              backgroundColor: "#ffffff",
-              borderRadius: 2,
-              p: { xs: 0.5, sm: 1 },
-              flex: 1,
-              minWidth: { xs: "100%", sm: "200px" }, // Полная ширина на мобильных
-            }}
-          >
-            <SearchIcon fontSize="small" />
-            <TextField
-              variant="outlined"
-              placeholder="Поиск..."
-              value={searchValue}
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setSearchValue(e.target.value)
-              }
-              InputProps={{
-                startAdornment: null,
-                // Убираем подчеркивание, используя стили
-                disableUnderline: true,
-              }}
-              sx={{
-                flex: 1,
-                border: "none",
-                "& .MuiOutlinedInput-root": {
-                  padding: 0,
-                  "& fieldset": {
-                    border: "none",
-                  },
-                },
-                ml: 1,
-                fontSize: { xs: "0.8rem", sm: "1rem" },
-              }}
-            />
-          </Box>
+  sx={{
+    display: "flex",
+    alignItems: "center",
+    backgroundColor: "#ffffff",
+    borderRadius: 2,
+    p: { xs: 0.5, sm: 1 },
+    flex: 1,
+    minWidth: { xs: "100%", sm: "200px" }, // Полная ширина на мобильных
+  }}
+>
+  {/* Значок поиска с отступом */}
+  <SearchIcon fontSize="small" sx={{ ml: 1.5 }} /> {/* Добавлен отступ */}
+  <TextField
+    variant="outlined"
+    placeholder="Поиск..."
+    value={searchValue}
+    onChange={(e: ChangeEvent<HTMLInputElement>) =>
+      setSearchValue(e.target.value)
+    }
+    InputProps={{
+      startAdornment: null,
+      // Убираем подчеркивание, используя стили
+      disableUnderline: true,
+    }}
+    sx={{
+      flex: 1,
+      border: "none",
+      "& .MuiOutlinedInput-root": {
+        padding: 0,
+        "& fieldset": {
+          border: "none",
+        },
+      },
+      ml: -0.5,
+      fontSize: { xs: "0.8rem", sm: "1rem" },
+    }}
+  />
+</Box>
+
 
           {/* Строка фильтров и сброса */}
           <Box
