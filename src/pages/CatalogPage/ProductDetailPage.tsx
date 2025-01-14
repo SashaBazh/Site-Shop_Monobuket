@@ -200,14 +200,14 @@ export default function ProductDetailPage() {
   // Формируем URL для главной картинки
   // Если ни media, ни image нет — подставляем путь к картинке по умолчанию
   let mainImageUrl =
-    "http://localhost:8000/api/data/image?image_path=%2Fassets%2Fimages%2Fdefault.jpg";
+    "https://course.excellentjewellery.ru/flowers/api/data/image?image_path=%2Fassets%2Fimages%2Fdefault.jpg";
 
   if (product?.media?.[0]) {
-    mainImageUrl = `http://localhost:8000/api/data/image?image_path=${encodeURIComponent(
+    mainImageUrl = `https://course.excellentjewellery.ru/flowers/api/data/image?image_path=${encodeURIComponent(
       product.media[0]
     )}`;
   } else if (product?.image) {
-    mainImageUrl = `http://localhost:8000/api/data/image?image_path=${encodeURIComponent(
+    mainImageUrl = `https://course.excellentjewellery.ru/flowers/api/data/image?image_path=${encodeURIComponent(
       product.image
     )}`;
   }
