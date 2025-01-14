@@ -26,17 +26,17 @@ export async function getCart(): Promise<CartResponse> {
 
 // Добавить товар в корзину
 export async function addToCart(product_id: number, quantity: number) {
-  await axiosInstance.post("/cart", { product_id, quantity });
+  await axiosInstance.post("/cart/", { product_id, quantity });
 }
 
 // Удалить товар из корзины
 export async function removeFromCart(product_id: number) {
-  await axiosInstance.delete("/cart", { params: { product_id } });
+  await axiosInstance.delete("/cart/", { params: { product_id } });
 }
 
 // Обновить количество товара в корзине
 export async function updateCartQuantity(product_id: number, quantity: number) {
-  await axiosInstance.put("/cart", { product_id, quantity });
+  await axiosInstance.put("/cart/", { product_id, quantity });
 }
 
 // Оформить заказ
