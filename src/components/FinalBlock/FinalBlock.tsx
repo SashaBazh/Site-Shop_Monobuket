@@ -15,14 +15,14 @@ const FinalBlock: React.FC = () => {
       viewport={{ once: true }}
       sx={{
         display: 'flex',
-        flexDirection: isMobile ? 'column' : 'row',
+        flexDirection: isMobile ? 'column-reverse' : 'row',
         gap: '40px',
         padding: isMobile ? '20px' : '60px',
         backgroundColor: '#E2DCD3',
         alignItems: 'flex-start',
       }}
     >
-      <Box sx={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      <Box sx={{ flex: '1', display: 'flex', flexDirection: 'reverse-column', gap: '20px' }}>
         <Box
           component="img"
           src={finalRect} // Используем переменную

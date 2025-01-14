@@ -49,6 +49,7 @@ const ProductImage = styled("img")(({ theme }) => ({
   maxWidth: "600px",
   height: "auto",
   borderRadius: "8px",
+  fontWeight: 400,
   objectFit: "cover",
   [theme.breakpoints.down("sm")]: {
     maxWidth: "90%",
@@ -63,7 +64,7 @@ const ProductTitle = styled(Typography)(({ theme }) => ({
   color: "#000",
   marginBottom: "24px",
   [theme.breakpoints.down("sm")]: {
-    fontSize: "24px",
+    fontSize: "30px",
     textAlign: "center",
   },
 }));
@@ -85,7 +86,7 @@ const PrimaryButton = styled(Button)(({ theme }) => ({
   padding: "16px 24px",
   textTransform: "none",
   fontSize: "1rem",
-  fontWeight: 400,
+  fontWeight: 300,
   backgroundColor: "#d6a3a8",
   color: "#000",
   borderRadius: "12px",
@@ -352,9 +353,19 @@ export default function ProductDetailPage() {
 
         {/* Похожие товары */}
         <Box sx={{ mt: 6, width: "100%" }}>
-          <Typography variant="h5" sx={{ mb: 4, textAlign: "left" }}>
-            Похожие товары
-          </Typography>
+        <Typography
+                variant="body1"
+                sx={{
+                  marginBottom: "10px",
+                  fontWeight: 300,
+                  fontSize: "36px",
+                  padding: "10px",
+                  "@media (max-width: 600px)": {
+                    fontSize: "36px", // Шрифт для экранов меньше 600px
+                  },
+                }}>Похожие товары </Typography>
+    
+          
 
           {loadingRelated ? (
             <CircularProgress />
@@ -364,103 +375,125 @@ export default function ProductDetailPage() {
             <Typography>Нет похожих товаров.</Typography>
           ) : (
             <Grid container spacing={2}>
-              {relatedProducts.map((r) => {
-                // Определяем путь к изображению
-                let relatedImageUrl =
-                  "http://localhost:8000/api/data/image?image_path=%2Fassets%2Fimages%2Fdefault.jpg";
-                if (r.media?.[0]) {
-                  relatedImageUrl = `http://localhost:8000/api/data/image?image_path=${encodeURIComponent(
-                    r.media[0]
-                  )}`;
-                } else if (r.image) {
-                  relatedImageUrl = `http://localhost:8000/api/data/image?image_path=${encodeURIComponent(
-                    r.image
-                  )}`;
+            {relatedProducts.map((r) => {
+              let relatedImageUrl =
+                "http://localhost:8000/api/data/image?image_path=%2Fassets%2Fimages%2Fdefault.jpg";
+              if (r.media?.[0]) {
+                relatedImageUrl = `http://localhost:8000/api/data/image?image_path=${encodeURIComponent(
+                  r.media[0]
+                )}`;
+              } else if (r.image) {
+                relatedImageUrl = `http://localhost:8000/api/data/image?image_path=${encodeURIComponent(
+                  r.image
+                )}`;
+              }
+          
+              const relatedCartItem = cartItems.find((i) => i.id === r.id);
+          
+              const handleRelatedBuy = (evt: React.MouseEvent) => {
+                evt.stopPropagation();
+                if (relatedCartItem) {
+                  updateItemQty(r.id, relatedCartItem.quantity + 1);
+                } else {
+                  addItem(r.id, 1);
                 }
-
-                const relatedCartItem = cartItems.find((i) => i.id === r.id);
-
-                const handleRelatedBuy = (evt: React.MouseEvent) => {
-                  evt.stopPropagation();
-                  if (relatedCartItem) {
-                    updateItemQty(r.id, relatedCartItem.quantity + 1);
-                  } else {
-                    addItem(r.id, 1);
-                  }
-                };
-
-                return (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={6}
-                    md={3} // Изменено на md={3} для отображения 4 карточек в строке
-                    key={r.id}
+              };
+          
+              return (
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={3}
+                  key={r.id}
+                  sx={{
+                    cursor: "pointer",
+                    "&:hover": { boxShadow: 4 },
+                    transition: "box-shadow 0.3s ease-in-out",
+                  }}
+                  onClick={() => handleRelatedClick(r.id)}
+                >
+                  <Box
                     sx={{
-                      cursor: "pointer",
-                      "&:hover": { boxShadow: 4 },
-                      transition: "box-shadow 0.3s ease-in-out",
+                      display: "flex",
+                      flexDirection: "column",
+                      textAlign: "left",
+                      backgroundColor: "#dcc7bd",
+                      borderRadius: "8px",
+                      overflow: "hidden",
+                      maxWidth: "400px", // Фиксированная ширина карточки
+                      margin: "0 auto",
                     }}
-                    onClick={() => handleRelatedClick(r.id)}
                   >
+                    <img
+                      src={relatedImageUrl}
+                      alt={r.name}
+                      style={{
+                        width: "100%",
+                        height: "200px",
+                        objectFit: "cover",
+                      }}
+                    />
+                    <Box sx={{ p: 2 }}>
+                      <Typography
+                        sx={{
+                          fontSize: "1.5rem", // Размер шрифта
+                          fontWeight: 100, // Очень тонкий шрифт
+                          mb: 1,
+                        }}
+                      >
+                        {r.name}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          color: "#555",
+                          fontWeight: 100, // Тонкий шрифт для описания
+                          fontSize: "0.9rem",
+                        }}
+                      >
+                        {r.description?.slice(0, 60)}...
+                      </Typography>
+                    </Box>
                     <Box
                       sx={{
                         display: "flex",
-                        flexDirection: "column",
-                        textAlign: "left",
-                        backgroundColor: "#dcc7bd",
-                        borderRadius: "8px",
-                        overflow: "hidden",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        p: 2,
+                        borderTop: "1px solid #ccc",
                       }}
                     >
-                      <img
-                        src={relatedImageUrl}
-                        alt={r.name}
-                        style={{
-                          width: "100%",
-                          height: "200px",
-                          objectFit: "cover",
-                        }}
-                      />
-                      <Box sx={{ p: 2 }}>
-                        <Typography sx={{ fontSize: "1.1rem", mb: 1 }}>
-                          {r.name}
-                        </Typography>
-                        <Typography variant="body2" sx={{ color: "#555" }}>
-                          {r.description?.slice(0, 60)}...
-                        </Typography>
-                      </Box>
-                      <Box
+                      <Typography
                         sx={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          p: 2,
-                          borderTop: "1px solid #ccc",
+                          fontWeight: 200, // Тонкий шрифт для цены
+                          fontSize: "1rem",
                         }}
                       >
-                        <Typography sx={{ fontWeight: "bold" }}>
-                          {r.price} руб.
-                        </Typography>
-                        <Button
-                          variant="contained"
-                          sx={{
-                            backgroundColor: "#443C41",
-                            color: "#fff",
-                            "&:hover": {
-                              backgroundColor: "#333",
-                            },
-                          }}
-                          onClick={handleRelatedBuy}
-                        >
-                          Купить
-                        </Button>
-                      </Box>
+                        {r.price} руб.
+                      </Typography>
+                      <Button
+                        variant="contained"
+                        sx={{
+                          backgroundColor: "#443C41",
+                          color: "#fff",
+                          fontSize: "0.85rem",
+                          fontWeight: 200,
+                          "&:hover": {
+                            backgroundColor: "#333",
+                          },
+                        }}
+                        onClick={handleRelatedBuy}
+                      >
+                        Купить
+                      </Button>
                     </Box>
-                  </Grid>
-                );
-              })}
-            </Grid>
+                  </Box>
+                </Grid>
+              );
+            })}
+          </Grid>
+          
           )}
         </Box>
       </ProductContainer>
