@@ -88,8 +88,8 @@ const BouquetSection: React.FC = () => {
             const imagePath = product.media?.[0] || product.image;
             // Формируем URL для изображения
             const imageUrl = imagePath
-              ? `http://localhost:8000/api/data/image?image_path=${encodeURIComponent(imagePath)}`
-              : "http://localhost:8000/api/data/image?image_path=%2Fassets%2Fimages%2Fdefault.jpg";
+              ? `https://course.excellentjewellery.ru/flowers/api/data/image?image_path=${encodeURIComponent(imagePath)}`
+              : "https://course.excellentjewellery.ru/flowers/api/data/image?image_path=%2Fassets%2Fimages%2Fdefault.jpg";
 
             return (
               <Grid

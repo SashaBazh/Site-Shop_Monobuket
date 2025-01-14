@@ -27,9 +27,9 @@ interface ProductCardProps {
 function getImageUrl(path?: string): string {
   if (!path) {
     // fallback
-    return "http://localhost:8000/api/data/image?image_path=%2Fassets%2Fimages%2Fdefault.jpg";
+    return "https://course.excellentjewellery.ru/flowers/api/data/image?image_path=%2Fassets%2Fimages%2Fdefault.jpg";
   }
-  return `http://localhost:8000/api/data/image?image_path=${encodeURIComponent(path)}`;
+  return `https://course.excellentjewellery.ru/flowers/api/data/image?image_path=${encodeURIComponent(path)}`;
 }
 
 export default function ProductCard({ product, onBuy }: ProductCardProps) {

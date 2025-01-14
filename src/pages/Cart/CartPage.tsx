@@ -191,10 +191,10 @@ const CartPage: React.FC = () => {
               // Формируем URL для изображения
               // Если в item.image путь пустой, подставляем дефолтное
               const imagePath = item.image
-                ? `http://localhost:8000/api/data/image?image_path=${encodeURIComponent(
+                ? `https://course.excellentjewellery.ru/flowers/api/data/image?image_path=${encodeURIComponent(
                     item.image
                   )}`
-                : "http://localhost:8000/api/data/image?image_path=%2Fassets%2Fimages%2Fdefault.jpg";
+                : "https://course.excellentjewellery.ru/flowers/appi/data/image?image_path=%2Fassets%2Fimages%2Fdefault.jpg";
 
               return (
                 <CartItemRow key={item.id}>

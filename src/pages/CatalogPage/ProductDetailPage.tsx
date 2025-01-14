@@ -377,13 +377,13 @@ export default function ProductDetailPage() {
             <Grid container spacing={2}>
             {relatedProducts.map((r) => {
               let relatedImageUrl =
-                "http://localhost:8000/api/data/image?image_path=%2Fassets%2Fimages%2Fdefault.jpg";
+                "https://course.excellentjewellery.ru/flowers/api/data/image?image_path=%2Fassets%2Fimages%2Fdefault.jpg";
               if (r.media?.[0]) {
-                relatedImageUrl = `http://localhost:8000/api/data/image?image_path=${encodeURIComponent(
+                relatedImageUrl = `https://course.excellentjewellery.ru/flowers/api/data/image?image_path=${encodeURIComponent(
                   r.media[0]
                 )}`;
               } else if (r.image) {
-                relatedImageUrl = `http://localhost:8000/api/data/image?image_path=${encodeURIComponent(
+                relatedImageUrl = `https://course.excellentjewellery.ru/flowers/api/data/image?image_path=${encodeURIComponent(
                   r.image
                 )}`;
               }
