@@ -55,6 +55,7 @@ export const Description = styled(Typography)(({ theme }) => ({
   WebkitLineClamp: 2,
   textOverflow: "ellipsis",
   height: "3rem",
+  
 }));
 
 export const CardBottom = styled(Box)(({ theme }) => ({
@@ -62,12 +63,18 @@ export const CardBottom = styled(Box)(({ theme }) => ({
   justifyContent: "space-between",
   alignItems: "center",
   margin: theme.spacing(1, 0),
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "0.8rem", // Например, ~14px
+  },
 }));
 
 export const Price = styled(Typography)(({ theme }) => ({
   fontWeight: "bold",
   color: "#000",
   fontSize: "1rem",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "0.9rem", // Например, ~14px
+  },
 }));
 
 export const BuyButton = styled(Button)(({ theme }) => ({
@@ -80,6 +87,9 @@ export const BuyButton = styled(Button)(({ theme }) => ({
   borderRadius: "8px",
   "&:hover": {
     backgroundColor: "#333",
+  },
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "0.9rem", // Например, ~14px
   },
 }));
 

@@ -70,7 +70,7 @@ export const Price = styled(Typography)(({ theme }) => ({
   color: "#000",
   fontSize: "1rem",
   [theme.breakpoints.down("sm")]: {
-    fontSize: "0.8rem", // Например, ~14px
+    fontSize: "0.85rem", // Например, ~14px
   },
 }));
 
@@ -87,7 +87,7 @@ export const BuyButton = styled(Button)(({ theme }) => ({
     backgroundColor: "#333", // Тёмный фон при наведении
   },
   [theme.breakpoints.down("sm")]: {
-    fontSize: "0.8rem", // Например, ~14px
+    fontSize: "0.85rem", // Например, ~14px
   },
 }));
 

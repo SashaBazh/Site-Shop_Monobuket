@@ -58,6 +58,9 @@ export const Price = styled(Typography)(({ theme }) => ({
   fontWeight: "bold",
   color: "#000",
   fontSize: "1rem",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "0.8rem", // Например, ~14px
+  },
 }));
 
 // <-- ВАЖНО! Экспортируем BuyButton с удалением фокуса
@@ -74,5 +77,8 @@ export const BuyButton = styled(Button)(({ theme }) => ({
   "&:focus": {
     outline: "none",
     boxShadow: "none",
+  },
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "0.8rem", // Например, ~14px
   },
 }));
