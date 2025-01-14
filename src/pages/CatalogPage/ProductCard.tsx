@@ -1,6 +1,4 @@
-// src/pages/CatalogPage/ProductCard.tsx
-
-import React from "react";
+import React, { useState } from "react";
 import {
   CardContainer,
   ImageContainer,
@@ -10,13 +8,14 @@ import {
   BuyButton,
   CardBottom,
 } from "./CardStyle";
+import { Snackbar, Alert } from "@mui/material";
 
 export interface Product {
   id: number;
   name: string;
   description?: string;
   price: number;
-  image?: string;   // путь к файлу
+  image?: string; // путь к файлу
   media?: string[]; // массив путей
 }
 
@@ -34,6 +33,8 @@ function getImageUrl(path?: string): string {
 }
 
 export default function ProductCard({ product, onBuy }: ProductCardProps) {
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+
   const noHighlight: React.CSSProperties = {
     WebkitTapHighlightColor: "transparent",
     outline: "none",
@@ -43,29 +44,46 @@ export default function ProductCard({ product, onBuy }: ProductCardProps) {
   const handleBuy = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     onBuy();
+    setSnackbarOpen(true); // Показываем уведомление
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false); // Закрываем уведомление
   };
 
   const mainPath = product.media?.[0] || product.image;
   const finalImg = getImageUrl(mainPath);
 
   return (
-    <CardContainer style={noHighlight}>
-      <ImageContainer>
-        <Image
-          src={finalImg}
-          alt={product.name}
-          style={noHighlight}
-        />
-      </ImageContainer>
-      <Description>
-        {product.name}
-      </Description>
-      <CardBottom>
-        <Price>{product.price} руб.</Price>
-        <BuyButton onClick={handleBuy} style={noHighlight}>
-          Купить
-        </BuyButton>
-      </CardBottom>
-    </CardContainer>
+    <>
+      <CardContainer style={noHighlight}>
+        <ImageContainer>
+          <Image src={finalImg} alt={product.name} style={noHighlight} />
+        </ImageContainer>
+        <Description>{product.name}</Description>
+        <CardBottom>
+          <Price>{product.price} руб.</Price>
+          <BuyButton onClick={handleBuy} style={noHighlight}>
+            Купить
+          </BuyButton>
+        </CardBottom>
+      </CardContainer>
+
+      {/* Уведомление */}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={2000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleSnackbarClose}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Товар добавлен в корзину!
+        </Alert>
+      </Snackbar>
+    </>
   );
 }
