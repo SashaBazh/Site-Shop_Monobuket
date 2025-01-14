@@ -20,7 +20,7 @@ interface CartResponse {
 
 // Получить корзину
 export async function getCart(): Promise<CartResponse> {
-  const res = await axiosInstance.get<CartResponse>("/cart");
+  const res = await axiosInstance.get<CartResponse>("/cart/");
   return res.data;
 }
 
