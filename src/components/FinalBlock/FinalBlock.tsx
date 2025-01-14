@@ -35,16 +35,48 @@ const FinalBlock: React.FC = () => {
       </Box>
 
       <Box sx={{ flex: '1', minWidth: '300px' }}>
-        <Typography variant="h2" sx={{ marginBottom: '20px' }}>
+        <Typography variant="h2" sx={{ marginBottom: '20px', "@media (max-width: 600px)": {
+      fontSize: "45px", // Шрифт для экранов меньше 600px
+    }, }}>
           Цветы и букеты с доставкой
-        </Typography>
-        <Typography variant="body1" sx={{ marginBottom: '10px', fontWeight: 300, fontSize: '30px' }}>
+          </Typography>
+          <Typography
+  variant="body1"
+  sx={{
+    marginBottom: "10px",
+    fontWeight: 300,
+    fontSize: "30px",
+    "@media (max-width: 600px)": {
+      fontSize: "18px", // Шрифт для экранов меньше 600px
+    },
+  }}
+>
+
+
           Мы – команда настоящих энтузиастов, которые обожают цветы и знают, как сделать ваш день ярче!
-        </Typography>
-        <Typography variant="body1" sx={{ marginBottom: '10px', fontWeight: 300, fontSize: '30px' }}>
+      </Typography>
+      <Typography
+  variant="body1"
+  sx={{
+    marginBottom: "10px",
+    fontWeight: 300,
+    fontSize: "30px",
+    "@media (max-width: 600px)": {
+      fontSize: "18px", // Шрифт для экранов меньше 600px
+    },
+  }}>
           Каждую неделю мы осуществляем свежие поставки цветов 3-4 раза, чтобы у нас всегда были самые лучшие и красивые букеты для вас.
         </Typography>
-        <Typography variant="body1" sx={{ fontWeight: 300, fontSize: '30px' }}>
+        <Typography
+  variant="body1"
+  sx={{
+    marginBottom: "10px",
+    fontWeight: 300,
+    fontSize: "30px",
+    "@media (max-width: 600px)": {
+      fontSize: "18px", // Шрифт для экранов меньше 600px
+    },
+  }}>
           Мы готовы доставить цветы прямо к Вашему порогу – быстро и удобно. При этом доставка бесплатна при заказе от 120 рублей.
         </Typography>
       </Box>

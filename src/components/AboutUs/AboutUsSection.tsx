@@ -24,16 +24,46 @@ const AboutUsSection: React.FC = () => {
       }}
     >
       <Box sx={{ flex: '1', minWidth: '300px', fontSize: '16px' }}>
-        <Typography variant="h2" sx={{ marginBottom: '20px' }}>
+        <Typography variant="h2" sx={{ marginBottom: '20px',"@media (max-width: 600px)": {
+                fontSize: "45px", // Шрифт для экранов меньше 600px
+              }, }}>
+          
           Цветочная подписка
         </Typography>
-        <Typography variant="body1" sx={{ marginBottom: '10px', fontWeight: 200, fontSize: '30px' }}>
+        <Typography
+  variant="body1"
+  sx={{
+    marginBottom: "10px",
+    fontWeight: 300,
+    fontSize: "30px",
+    "@media (max-width: 600px)": {
+      fontSize: "18px", // Шрифт для экранов меньше 600px
+    },
+  }}>
           Цветочная подписка – это с любовью подобранные цветы, которые станут приятным дополнением вашего интерьера.
         </Typography>
-        <Typography variant="body1" sx={{ marginBottom: '10px', fontWeight: 300, fontSize: '30px' }}>
+        <Typography
+  variant="body1"
+  sx={{
+    marginBottom: "10px",
+    fontWeight: 300,
+    fontSize: "30px",
+    "@media (max-width: 600px)": {
+      fontSize: "18px", // Шрифт для экранов меньше 600px
+    },
+  }}>
           Каждую неделю вас будут радовать свежие сезонные цветы, состав которых мы можем согласовать с вами.
         </Typography>
-        <Typography variant="body1" sx={{ fontWeight: 300, fontSize: '30px' }}>
+        <Typography
+  variant="body1"
+  sx={{
+    marginBottom: "10px",
+    fontWeight: 300,
+    fontSize: "30px",
+    "@media (max-width: 600px)": {
+      fontSize: "18px", // Шрифт для экранов меньше 600px
+    },
+  }}>
           Это идеальный подарок для себя или для ваших близких.
         </Typography>
       </Box>

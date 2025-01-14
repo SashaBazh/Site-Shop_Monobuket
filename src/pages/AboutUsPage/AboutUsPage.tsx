@@ -53,9 +53,20 @@ const AboutUsPage: React.FC = () => {
             transition={{ duration: 1 }}
           >
             <SectionTitle variant="h2">Что такое МОНОБУКЕТ</SectionTitle>
-            <SectionText variant="body1">
+      
+              <Typography
+                variant="body1"
+                sx={{
+                  marginBottom: "10px",
+                  fontWeight: 300,
+                  fontSize: "30px",
+                  padding: "10px",
+                  "@media (max-width: 600px)": {
+                    fontSize: "18px", // Шрифт для экранов меньше 600px
+                  },
+                }}>
               МОНОБУКЕТ - мы создаем не просто букеты, а настоящие произведения искусства. Влюбленные в свое дело, мы знаем всё о цветах и поможем создать именно тот букет, который расскажет вашу историю. Мы живем цветами и точно знаем, как превратить любой повод в незабываемый момент с помощью идеально подобранной композиции.
-            </SectionText>
+              </Typography>
             <AboutImage src={aboutImage1} alt="about_image1" />
           </motion.div>
         </ContentWrapper>
@@ -68,13 +79,32 @@ const AboutUsPage: React.FC = () => {
             animate={{ opacity: inViewSection2 ? 1 : 0, x: inViewSection2 ? 0 : -50 }}
             transition={{ duration: 1 }}
           >
-            <SectionSubtitle1 variant="h2">Рады представить вам:</SectionSubtitle1>
+            <Typography
+                variant="body1"
+                sx={{
+                  marginBottom: "10px",
+                  fontWeight: 300,
+                  fontSize: "36px",
+                  padding: "10px",
+                  "@media (max-width: 600px)": {
+                    fontSize: "30px", // Шрифт для экранов меньше 600px
+                  },
+                }}>Рады представить вам: </Typography>
             <Grid container spacing={4} justifyContent="center">
               <Grid item xs={12} sm={4}>
                 <CircleItem>
                   <CircleText>1</CircleText>
                 </CircleItem>
-                <CircleText1>
+                <CircleText1 variant="body1"
+                sx={{
+                  marginBottom: "10px",
+                  fontWeight: 300,
+                  fontSize: "25px",
+                  padding: "10px",
+                  "@media (max-width: 600px)": {
+                    fontSize: "20px", // Шрифт для экранов меньше 600px
+                  },
+                }}>
                   Подписка на букеты
                 </CircleText1>
               </Grid>
@@ -82,7 +112,16 @@ const AboutUsPage: React.FC = () => {
                 <CircleItem>   
                   <CircleText>2</CircleText>
                 </CircleItem>
-                <CircleText1>
+                <CircleText1 variant="body1"
+                sx={{
+                  marginBottom: "10px",
+                  fontWeight: 300,
+                  fontSize: "25px",
+                  padding: "10px",
+                  "@media (max-width: 600px)": {
+                    fontSize: "20px", // Шрифт для экранов меньше 600px
+                  },
+                }}>
                   Цветочное оформление
                 </CircleText1>
               </Grid>
@@ -90,7 +129,16 @@ const AboutUsPage: React.FC = () => {
                 <CircleItem>
                   <CircleText>3</CircleText>
                 </CircleItem>
-                <CircleText1>
+                <CircleText1 variant="body1"
+                sx={{
+                  marginBottom: "10px",
+                  fontWeight: 300,
+                  fontSize: "25px",
+                  padding: "10px",
+                  "@media (max-width: 600px)": {
+                    fontSize: "20px", // Шрифт для экранов меньше 600px
+                  },
+                }}>
                   Букеты, цветочные композиции
                 </CircleText1>
               </Grid>
@@ -107,10 +155,30 @@ const AboutUsPage: React.FC = () => {
             animate={{ opacity: inViewSection3 ? 1 : 0, y: inViewSection3 ? 0 : 50 }}
             transition={{ duration: 1 }}
           >
-            <SectionSubtitle variant="h2">Почему именно мы</SectionSubtitle>
-            <SectionText variant="body1">
+            <Typography
+                variant="body1"
+                sx={{
+                  marginBottom: "10px",
+                  fontWeight: 300,
+                  fontSize: "36px",
+                  padding: "10px",
+                  "@media (max-width: 600px)": {
+                    fontSize: "36px", // Шрифт для экранов меньше 600px
+                  },
+                }}>Почему именно мы </Typography>
+            <Typography
+                variant="body1"
+                sx={{
+                  marginBottom: "10px",
+                  fontWeight: 300,
+                  fontSize: "30px",
+                  padding: "10px",
+                  "@media (max-width: 600px)": {
+                    fontSize: "18px", // Шрифт для экранов меньше 600px
+                  },
+                }}>
               В "Монобукете" мы уверены, что выбор букета требует такого же профессионального подхода, как и выбор автомобиля или дорогих украшений. Наши флористы-эксперты помогут вам создать именно ту цветочную композицию, которая идеально подойдет для вашего особенного случая.
-            </SectionText>
+              </Typography>
             <AboutImage1 src={aboutImage3} alt="about_image3" />
           </motion.div>
         </ContentWrapper>
