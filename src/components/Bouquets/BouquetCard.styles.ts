@@ -53,12 +53,15 @@ export const Description = styled(Typography)(({ theme }) => ({
   height: "3rem", // Фиксированная высота для одинакового размера
 }));
 
+
+
 // Контейнер для нижней части карточки (цена и кнопка)
 export const CardBottom = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  marginTop: theme.spacing(2),
+  marginTop: theme.spacing(),
+
 }));
 
 // Стили для текста цены
@@ -66,6 +69,9 @@ export const Price = styled(Typography)(({ theme }) => ({
   fontWeight: "bold",
   color: "#000",
   fontSize: "1rem",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "0.8rem", // Например, ~14px
+  },
 }));
 
 // Стили для кнопки "Купить"
@@ -80,4 +86,9 @@ export const BuyButton = styled(Button)(({ theme }) => ({
   "&:hover": {
     backgroundColor: "#333", // Тёмный фон при наведении
   },
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "0.8rem", // Например, ~14px
+  },
 }));
+
+
