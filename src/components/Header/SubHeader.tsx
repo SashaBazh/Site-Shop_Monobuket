@@ -23,7 +23,7 @@ const SubHeaderContainer = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   gap: theme.spacing(4),
-  padding: theme.spacing(1, 2),
+  padding: theme.spacing(1, 2), 
   backgroundColor: "#000000",
   [theme.breakpoints.down("md")]: {
     justifyContent: "space-between",
@@ -35,7 +35,8 @@ const FilterLink = styled(MuiLink)(({ theme }) => ({
   color: "#ffffff",
   textDecoration: "none",
   fontWeight: 300,
-  fontSize: "1.1rem",
+  
+  fontSize: "1rem",
   cursor: "pointer",
   "&:hover": {
     color: theme.palette.primary.main,

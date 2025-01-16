@@ -97,8 +97,8 @@ const TopSellersSection: React.FC = () => {
       <Container
         disableGutters
         sx={{
-          py: 5,
-          px: 4,
+          py: 4,
+          px: 2 ,
           textAlign: "center",
           maxWidth: "1200px",
           margin: "0 auto",

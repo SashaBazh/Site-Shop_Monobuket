@@ -1,29 +1,31 @@
-// SliderSection.styles.ts
-import { styled } from '@mui/material/styles';
-import { Box, IconButton } from '@mui/material'; // Добавляем импорт IconButton
+import { styled } from "@mui/material/styles";
+import { Box, IconButton } from "@mui/material";
 
+// Контейнер слайдера
 export const SliderContainer = styled(Box)(({ theme }) => ({
-  position: 'relative',
-  width: '100%',
-  height: '100vh',
-  overflow: 'hidden',
-  backgroundColor: '#dcc7bd',
-  [theme.breakpoints.down('sm')]: {
-    height: '60vh', // уменьшаем высоту на мобильных
-    
+  position: "relative",
+  overflow: "hidden",
+  width: "100%",
+  // Задаём фиксированную высоту (или более гибкую) для всего слайдера
+  height: "90vh", // При больших экранах
+  [theme.breakpoints.down("md")]: {
+    height: "60vh", // На средних экранах (таблеты)
+  },
+  [theme.breakpoints.down("sm")]: {
+    height: "40vh", // На телефонах
   },
 }));
 
-// Стиль для кнопок стрелок
+// Кнопки стрелок
 export const ArrowButton = styled(IconButton)(({ theme }) => ({
-  position: 'absolute',
-  top: '50%',
-  color: '#fff',
-  zIndex: 10,
-  transform: 'translateY(-50%)',
-  filter: 'invert(1)',
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '1.5rem', // Уменьшаем размер стрелок для мобильных
-
+  position: "absolute",
+  top: "50%",
+  transform: "translateY(-50%)",
+  zIndex: 2,
+  color: "#000",
+  backgroundColor: "transparent",
+   filter: 'invert(1)',
+  "&:hover": {
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
   },
 }));

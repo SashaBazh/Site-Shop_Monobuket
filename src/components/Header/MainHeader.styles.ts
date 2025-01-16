@@ -10,6 +10,7 @@ export const MainHeaderContainer = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   padding: theme.spacing(2, 4),
   backgroundColor: '#dcc7bd',
+  
   [theme.breakpoints.down('sm')]: {
     flexDirection: 'column',
     alignItems: 'flex-start',
@@ -38,7 +39,7 @@ export const NavRightContainer = styled(Box)(({ theme }) => ({
 export const NavLink = styled(Link)(({ theme }) => ({
   color: theme.palette.text.primary,
   textDecoration: 'none',
-  fontWeight: 400,
+  fontWeight: 300,
   fontSize: '16px',
   '&:hover': {
     color: theme.palette.primary.main,
@@ -52,6 +53,7 @@ export const NavLink = styled(Link)(({ theme }) => ({
 export const Logo = styled('img')(({ theme }) => ({
   height: '50px',
   objectFit: 'contain',
+  fontWeight: 300,
   [theme.breakpoints.down('sm')]: {
     height: '40px',
   },
@@ -62,7 +64,7 @@ export const LogoutButton = styled(Button)(({ theme }) => ({
   backgroundColor: '#333', // Тёмный фон
   color: '#fff',
   textTransform: 'none',
-  fontWeight: 400,
+  fontWeight: 300,
   fontSize: '16px',
   borderRadius: '8px',
   padding: theme.spacing(1, 2),

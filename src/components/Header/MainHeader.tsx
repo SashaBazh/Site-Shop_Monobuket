@@ -45,7 +45,7 @@ const NavRightContainer = styled(Box)(({ theme }) => ({
 const NavLink = styled(Link)(({ theme }) => ({
   color: theme.palette.text.primary,
   textDecoration: "none",
-  fontWeight: 400,
+  fontWeight: 350,
   fontSize: "16px",
   "&:hover": {
     color: theme.palette.primary.main,
@@ -70,13 +70,14 @@ const LogoutButton = styled("button")(({ theme }) => ({
   borderRadius: "8px",
   cursor: "pointer",
   fontSize: "16px",
-  fontWeight: 400,
+  fontWeight: 350,
   "&:hover": {
     backgroundColor: "#555",
   },
   [theme.breakpoints.down("sm")]: {
     width: "100%",
     fontSize: "14px",
+    
     padding: theme.spacing(0.5, 1),
     marginTop: theme.spacing(1),
   },
@@ -193,6 +194,9 @@ const MainHeader: React.FC = () => {
               backgroundColor: "#dcc7bd",
               height: "100%",
               paddingTop: 2,
+              fontWeight: 300,
+              
+              
             }}
           >
             <IconButton
@@ -201,6 +205,7 @@ const MainHeader: React.FC = () => {
               aria-label="close"
               onClick={toggleDrawer}
               sx={{ alignSelf: "flex-end", m: 2 }}
+              
             >
               <CloseIcon />
             </IconButton>
@@ -258,6 +263,7 @@ const MainHeader: React.FC = () => {
             right: 0,
             zIndex: (theme) => theme.zIndex.drawer + 2, // Выше MainHeader
             boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+            
             transition: "transform 0.3s ease-in-out",
             transform: showG2Header ? "translateY(0)" : "translateY(-110%)",
           }}
@@ -320,11 +326,13 @@ const MainHeader: React.FC = () => {
             <Box
               sx={{
                 width: 250,
+                fontWeight: 300,
                 display: "flex",
                 flexDirection: "column",
                 backgroundColor: "#dcc7bd",
                 height: "100%",
                 paddingTop: 2,
+                
               }}
             >
               <IconButton

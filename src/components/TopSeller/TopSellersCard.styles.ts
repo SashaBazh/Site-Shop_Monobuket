@@ -21,10 +21,9 @@ export const CardContainer = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   textAlign: "left", // Выравнивание текста по левому краю
   backgroundColor: "#E2DCD3",
-  padding: theme.spacing(0.2), // Общие отступы внутри карточки
+  padding: theme.spacing(0.01), // Общие отступы внутри карточки
   animation: `${fadeIn} 0.2s ease-in-out`, // Применение анимации
   borderRadius: "8px", // Слегка закругленные углы
-
   transition: "box-shadow 0.3s ease-in-out", // Плавное изменение тени при наведении
   "&:hover": {
     boxShadow: "0 8px 12px rgba(0, 0, 0, 0.2)", // Увеличенная тень при наведении
@@ -37,7 +36,7 @@ export const Image = styled("img")(({ theme }) => ({
   height: "200px", // Фиксированная высота для всех изображений
   objectFit: "cover", // Центрирование и обрезка изображения
   borderRadius: "4px", // Слегка закругленные углы изображения
-  marginBottom: theme.spacing(2),
+  marginBottom: theme.spacing(0.2),
 }));
 
 // Стили для описания карточки
@@ -51,22 +50,26 @@ export const Description = styled(Typography)(({ theme }) => ({
   WebkitBoxOrient: "vertical",
   WebkitLineClamp: 2, // Ограничение текста в 2 строки
   textOverflow: "ellipsis", // Добавление троеточия
-  height: "3rem", // Фиксированная высота для одинакового размера
+  height: "1.2rem", // Фиксированная высота для одинакового размера
 }));
+
+
 
 // Контейнер для нижней части карточки (цена и кнопка)
 export const CardBottom = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  marginTop: theme.spacing(2),
+  marginTop: theme.spacing(0.2),
+
 }));
 
 // Стили для текста цены
 export const Price = styled(Typography)(({ theme }) => ({
-  fontWeight: "bold",
+  fontWeight: 400,
   color: "#000",
   fontSize: "1rem",
+  
   [theme.breakpoints.down("sm")]: {
     fontSize: "0.85rem", // Например, ~14px
   },
@@ -88,4 +91,5 @@ export const BuyButton = styled(Button)(({ theme }) => ({
     fontSize: "0.85rem", // Например, ~14px
   },
 }));
+
 

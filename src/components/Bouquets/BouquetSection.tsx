@@ -1,19 +1,17 @@
-// src/components/Bouquets/BouquetSection.tsx
-
 import React, { useEffect, useState } from "react";
 import { Box, Container, Grid, Typography, CircularProgress, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axiosInstance";
 import { useCart } from "../../context/CartContext";
-import BouquetCard from "./BouquetCard"; // Убедитесь, что импорт правильный
+import BouquetCard from "./BouquetCard";
 
 interface Product {
   id: number;
   name: string;
   price: number;
   description?: string;
-  image?: string;   // Абсолютный путь к изображению на сервере
-  media?: string[]; // Массив путей к изображениям
+  image?: string;
+  media?: string[];
   category_id?: number;
 }
 
@@ -29,7 +27,6 @@ const BouquetSection: React.FC = () => {
     setLoading(true);
     (async () => {
       try {
-        // Предполагаем, что эндпоинт возвращает новые букеты
         const res = await axiosInstance.get<Product[]>("/products/new?limit=6");
         setProducts(res.data);
       } catch (err) {
@@ -47,9 +44,9 @@ const BouquetSection: React.FC = () => {
     cursor: "pointer",
   };
 
-  function handleCardClick(prodId: number) {
+  const handleCardClick = (prodId: number) => {
     navigate(`/product/${prodId}`);
-  }
+  };
 
   const handleBuyClick = (product: Product) => {
     const existingItem = cartItems.find((item) => item.id === product.id);
@@ -62,7 +59,7 @@ const BouquetSection: React.FC = () => {
 
   return (
     <Box sx={{ width: "100%", backgroundColor: "#dcc7bd" }}>
-      <Container disableGutters sx={{ py: 5, px: 4, textAlign: "center" }}>
+      <Container disableGutters sx={{ py: 4, px: 2, textAlign: "center" }}>
         <Typography
           variant="h2"
           sx={{
@@ -82,11 +79,28 @@ const BouquetSection: React.FC = () => {
           <Typography>Нет букетов для отображения.</Typography>
         )}
 
-        <Grid container spacing={2} justifyContent="center">
+        <Grid 
+          container 
+          spacing={2}
+          sx={{ 
+            justifyContent: "center",
+            // Специальные отступы только для мобильных устройств
+            [`@media (max-width:600px)`]: {
+              columnGap: "16px",
+              rowGap: "24px",
+              spacing: 0,
+              width: "auto",
+              margin: "0",
+              "& .MuiGrid-item": {
+                padding: 0,
+                marginLeft: 0,
+                marginRight: 0
+              }
+            }
+          }}
+        >
           {products.map((product) => {
-            // Определяем путь к изображению
             const imagePath = product.media?.[0] || product.image;
-            // Формируем URL для изображения
             const imageUrl = imagePath
               ? `https://course.excellentjewellery.ru/flowers/api/data/image?image_path=${encodeURIComponent(imagePath)}`
               : "https://course.excellentjewellery.ru/flowers/api/data/image?image_path=%2Fassets%2Fimages%2Fdefault.jpg";
@@ -94,7 +108,7 @@ const BouquetSection: React.FC = () => {
             return (
               <Grid
                 item
-                xs={6}
+                xs={5.7}
                 sm={4}
                 md={2}
                 key={product.id}
