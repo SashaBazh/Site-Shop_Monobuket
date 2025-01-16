@@ -45,7 +45,7 @@ export const Image = styled("img")(({ theme }) => ({
 }));
 
 export const Description = styled(Typography)(({ theme }) => ({
-  margin: theme.spacing(0, 0, 1, 0),
+  margin: theme.spacing(0.5, 0, 1, 0),
   color: "#000",
   fontWeight: 300,
   fontSize: "1rem",
