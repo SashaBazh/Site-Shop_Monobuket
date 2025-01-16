@@ -75,8 +75,31 @@ export default function CatalogPage() {
   const categoryFromUrl = searchParams.get("category") || "";
 
   // Пагинация
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 15;
+  // Пагинация
+const [currentPage, setCurrentPage] = useState(1);
+const [itemsPerPage, setItemsPerPage] = useState(15); // Дефолтное значение
+
+// Обработчик изменения ширины экрана
+useEffect(() => {
+  const handleResize = () => {
+    if (window.innerWidth <= 768) {
+      setItemsPerPage(14); // На мобильных экранах
+    } else {
+      setItemsPerPage(15); // На десктопе
+    }
+  };
+
+  // Устанавливаем начальное значение при загрузке
+  handleResize();
+
+  // Подписываемся на изменение размера окна
+  window.addEventListener("resize", handleResize);
+
+  // Убираем подписку при размонтировании компонента
+  return () => {
+    window.removeEventListener("resize", handleResize);
+  };
+}, []);
 
   // Корзина
   const { addItem, cartItems, updateItemQty } = useCart();
@@ -424,10 +447,12 @@ export default function CatalogPage() {
                 variant="contained"
                 size="small"
                 sx={{
+                  
                   backgroundColor: "#65293E",
                   color: "#FFFFFF",
                   textTransform: "none",
                   fontWeight: 300,
+                  
                   "&:hover": {
                     backgroundColor: "#531E31",
                   },
@@ -533,28 +558,35 @@ export default function CatalogPage() {
 
         {/* Пагинация */}
         {!loading && !error && paginatedProducts.length > 0 && totalPages > 1 && (
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 4, mb: 4 }}>
-            <Pagination
-              count={totalPages}
-              page={currentPage}
-              onChange={handlePageChange}
-              shape="rounded"
-              showFirstButton
-              showLastButton
-              sx={{
-                "& .MuiPaginationItem-root.Mui-selected": {
-                  backgroundColor: "#65293E", // Цвет заливки для выбранной страницы
-                  color: "#FFFFFF", // Белый текст для контраста
-                  "&:hover": {
-                    backgroundColor: "#531E31",
-                  },
-                },
-                "& .MuiPaginationItem-root": {
-                  borderRadius: "50%",
-                },
-              }}
-            />
-          </Box>
+         <Box sx={{ display: "flex", justifyContent: "center", mt: 4, mb: 4 }}>
+         <Pagination
+           count={totalPages}
+           page={currentPage}
+           onChange={handlePageChange}
+           shape="rounded"
+           showFirstButton
+           showLastButton
+           sx={{
+             "& .MuiPaginationItem-root": {
+              
+              
+               color: "#333333", // Тёмный цвет текста для невыбранных страниц
+               borderRadius: "50%",
+               "&:hover": {
+                 backgroundColor: "#ссс", // Лёгкий фон при наведении
+               },
+             },
+             "& .MuiPaginationItem-root.Mui-selected": {
+               backgroundColor: "#65293E", // Цвет фона для выбранной страницы
+               color: "#FFFFFF", // Белый текст для выбранной страницы
+               "&:hover": {
+                 backgroundColor: "#531E31",
+               },
+             },
+           }}
+         />
+       </Box>
+       
         )}
       </CatalogContainer>
 
