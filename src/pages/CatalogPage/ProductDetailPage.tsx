@@ -461,7 +461,7 @@ export default function ProductDetailPage() {
                         justifyContent: "space-between",
                         alignItems: "center",
                         p: 2,
-                        borderTop: "1px solid #ccc",
+                        borderTop: "1px solid #7c5661",
                       }}
                     >
                       <Typography
