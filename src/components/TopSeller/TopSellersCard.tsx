@@ -8,15 +8,7 @@ import {
   CardBottom,
 } from "./TopSellersCard.styles";
 import { Snackbar, Alert } from "@mui/material";
-
-// Интерфейс для пропсов карточки
-interface TopSellersCardProps {
-  img: string; // Полный URL к изображению
-  desc: string; // Описание товара
-  price: string; // Цена товара
-  onCardClick: () => void; // Клик по карточке
-  onBuyClick: () => void; // Кнопка "Купить"
-}
+import { TopSellersCardProps } from "../../types/TopSellersCard.types";
 
 const TopSellersCard: React.FC<TopSellersCardProps> = ({
   img,
@@ -27,22 +19,18 @@ const TopSellersCard: React.FC<TopSellersCardProps> = ({
 }) => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
-  // Открытие уведомления
   const handleBuyClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation(); // Предотвращаем всплытие события
-    onBuyClick(); // Вызываем переданный обработчик "Купить"
-    setSnackbarOpen(true); // Показываем уведомление
+    e.stopPropagation();
+    onBuyClick();
+    setSnackbarOpen(true);
   };
 
-  // Закрытие уведомления
   const handleSnackbarClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
   ) => {
-    if (reason === "clickaway") {
-      return; // Игнорируем закрытие при клике вне уведомления
-    }
-    setSnackbarOpen(false); // Закрываем уведомление
+    if (reason === "clickaway") return;
+    setSnackbarOpen(false);
   };
 
   return (
@@ -56,7 +44,6 @@ const TopSellersCard: React.FC<TopSellersCardProps> = ({
         </CardBottom>
       </CardContainer>
 
-      {/* Уведомление */}
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={2000}

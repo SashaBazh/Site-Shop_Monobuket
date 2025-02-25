@@ -1,21 +1,24 @@
-// src/components/TopSeller/TopSellersSection.tsx
-
 import React, { useEffect, useState, useRef } from "react";
-import { Box, Container, Grid, Typography, CircularProgress, Alert } from "@mui/material";
+import {
+  Box,
+  Container,
+  Grid,
+  Typography,
+  CircularProgress,
+  Alert,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import TopSellersCard from "./TopSellersCard";
 import axiosInstance from "../../api/axiosInstance";
 import { useCart } from "../../context/CartContext";
-
-interface ProductType {
-  id: number;
-  name: string;
-  price: number;
-  description?: string;
-  image?: string;   // Абсолютный путь к изображению на сервере
-  media?: string[]; // Массив путей к изображениям
-  category_id?: number;
-}
+import { ProductType } from "../../types/TopSellersSection.types";
+import {
+  sectionContainer,
+  contentContainer,
+  titleStyle,
+  gridItemStyle,
+} from "./TopSellersSection.styles";
+import { getImageUrl } from "../../api/config";
 
 function getRandomProducts(products: ProductType[], count: number) {
   const shuffled = [...products].sort(() => Math.random() - 0.5);
@@ -26,19 +29,20 @@ const TopSellersSection: React.FC = () => {
   const [visibleCards, setVisibleCards] = useState<number[]>([]);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
-  const { cartItems, addItem, updateItemQty } = useCart();
+  const { addItem } = useCart();
 
   const [allProducts, setAllProducts] = useState<ProductType[]>([]);
   const [randomProducts, setRandomProducts] = useState<ProductType[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // 1) Загружаем все товары
   useEffect(() => {
     setLoading(true);
     (async () => {
       try {
-        const res = await axiosInstance.get<ProductType[]>("/products/category/0?limit=100");
+        const res = await axiosInstance.get<ProductType[]>(
+          "/products/category/0?limit=100"
+        );
         setAllProducts(res.data);
       } catch (error) {
         console.error("Ошибка при загрузке всех товаров:", error);
@@ -49,7 +53,6 @@ const TopSellersSection: React.FC = () => {
     })();
   }, []);
 
-  // 2) Берём 6 случайных
   useEffect(() => {
     if (allProducts.length > 0) {
       const sixRandom = getRandomProducts(allProducts, 6);
@@ -57,7 +60,6 @@ const TopSellersSection: React.FC = () => {
     }
   }, [allProducts]);
 
-  // Анимация появления карточек
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -84,36 +86,17 @@ const TopSellersSection: React.FC = () => {
   };
 
   const handleBuyClick = (product: ProductType) => {
-    const existingItem = cartItems.find((item) => item.id === product.id);
-    if (existingItem) {
-      updateItemQty(product.id, existingItem.quantity + 1);
-    } else {
-      addItem(product.id, 1);
-    }
+    addItem(product.id, 1, {
+      name: product.name,
+      price: product.price,
+      image: product.media?.[0] || product.image,
+    });
   };
 
   return (
-    <Box sx={{ width: "100%", backgroundColor: "#E2DCD3" }}>
-      <Container
-        disableGutters
-        sx={{
-          py: 4,
-          px: 2 ,
-          textAlign: "center",
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
-      >
-        <Typography
-          variant="h2"
-          sx={{
-            fontFamily: "Roboto, sans-serif",
-            fontWeight: 300,
-            fontSize: "3.5rem",
-            color: "#000",
-            mb: 4,
-          }}
-        >
+    <Box sx={sectionContainer}>
+      <Container disableGutters sx={contentContainer}>
+        <Typography variant="h2" sx={titleStyle}>
           Топ продаж
         </Typography>
 
@@ -123,14 +106,15 @@ const TopSellersSection: React.FC = () => {
           <Typography>Нет товаров для отображения.</Typography>
         )}
 
-        <Grid container spacing={2} justifyContent="space-between" ref={containerRef}>
+        <Grid
+          container
+          spacing={2}
+          justifyContent="space-between"
+          ref={containerRef}
+        >
           {randomProducts.map((product, index) => {
-            // Определяем путь к изображению
             const imagePath = product.media?.[0] || product.image;
-            // Формируем URL для изображения
-            const imageUrl = imagePath
-              ? `https://course.excellentjewellery.ru/flowers/api/data/image?image_path=${encodeURIComponent(imagePath)}`
-              : "https://course.excellentjewellery.ru/flowers/api/data/image?image_path=%2Fassets%2Fimages%2Fdefault.jpg";
+            const imageUrl = getImageUrl(imagePath);
 
             return (
               <Grid
@@ -140,15 +124,7 @@ const TopSellersSection: React.FC = () => {
                 md={2}
                 key={product.id}
                 data-index={index}
-                sx={{
-                  opacity: visibleCards.includes(index) ? 1 : 0,
-                  transform: visibleCards.includes(index)
-                    ? "translateY(0)"
-                    : "translateY(20px)",
-                  transition: "opacity 0.5s ease-in-out, transform 0.5s ease-in-out",
-                  transitionDelay: `${index * 0.1}s`,
-                  cursor: "pointer",
-                }}
+                sx={gridItemStyle(index, visibleCards)}
               >
                 <TopSellersCard
                   img={imageUrl}

@@ -1,22 +1,22 @@
 import React from 'react';
 import { YMaps, Map, Placemark } from '@pbe/react-yandex-maps';
-import './YandexMap.css'; // Подключаем внешний CSS файл для стилей
+import { YandexMapContainer } from './YandexMap.styles';
 
 const YandexMap: React.FC = () => {
   const defaultState = {
-    center: [53.942595, 27.598719], // Координаты магазина Monobyket
+    center: [53.942595, 27.598719],
     zoom: 16,
   };
 
   return (
     <YMaps>
-      <div className="yandex-map-container">
+      <YandexMapContainer>
         <Map
           defaultState={defaultState}
           width="100%"
           height="100%"
           options={{
-            suppressMapOpenBlock: true, // Убираем лишние элементы UI
+            suppressMapOpenBlock: true,
           }}
         >
           <Placemark
@@ -27,7 +27,7 @@ const YandexMap: React.FC = () => {
             }}
           />
         </Map>
-      </div>
+      </YandexMapContainer>
     </YMaps>
   );
 };

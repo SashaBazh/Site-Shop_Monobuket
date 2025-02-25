@@ -27,14 +27,17 @@
     "react-slick": "github:akiran/react-slick",
     "react-swipeable": "^7.0.2",
     "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.15",
     "swiper": "^11.1.15",
     "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",
+    "@types/node": "^22.13.4",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@types/react-router-dom": "^5.3.3",
+    "@types/styled-components": "^5.1.34",
     "@types/swiper": "^5.4.3",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9.15.0",
@@ -43,6 +46,6 @@
     "globals": "^15.12.0",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.15.0",
-    "vite": "^6.0.1"
+    "vite": "^6.1.0"
   }
 }

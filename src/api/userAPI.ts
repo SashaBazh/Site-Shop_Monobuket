@@ -1,17 +1,30 @@
-// src/api/userAPI.ts
 import axiosInstance from './axiosInstance';
 
-export async function getUserProfile() {
-  const res = await axiosInstance.get('/user/profile');
-  return res.data; 
-}
+export const loginUser = async (email: string, password: string) => {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    const response = await axiosInstance.post('/auth', { email, password });
+    if (response.data.access_token) {
+      localStorage.setItem("access_token", response.data.access_token);
+      localStorage.setItem("refresh_token", response.data.refresh_token);
+    }
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
-interface UpdateProfilePayload {
-  name: string;
-  birthday?: string; // в формате 'YYYY-MM-DD' или ISO
-}
+export const refreshAccessToken = async () => {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    const refresh_token = localStorage.getItem("refresh_token");
+    if (!refresh_token) throw new Error("No refresh token available");
 
-export async function updateUserProfile(payload: UpdateProfilePayload) {
-  const res = await axiosInstance.put('/user/profile', payload);
-  return res.data;
-}
+    const response = await axiosInstance.post('/auth/refresh', { refresh_token });
+    localStorage.setItem("access_token", response.data.access_token);
+    localStorage.setItem("refresh_token", response.data.refresh_token);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

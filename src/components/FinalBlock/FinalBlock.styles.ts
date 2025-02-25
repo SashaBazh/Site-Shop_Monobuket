@@ -3,44 +3,53 @@ import { Box, Typography } from '@mui/material';
 
 export const FinalBlockContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
-  gap: theme.spacing(4),
-  padding: theme.spacing(8, 4),
+  gap: '40px',
+  padding: '60px',
+  backgroundColor: '#E2DCD3',
   alignItems: 'flex-start',
-  backgroundColor: theme.palette.background.default,
+  flexDirection: 'row',
+
+  [theme.breakpoints.down('sm')]: {
+    flexDirection: 'column-reverse',
+    padding: '20px',
+  },
 }));
 
-export const ImagesContainer = styled(Box)(({ theme }) => ({
+export const ImagesContainer = styled(Box)({
   flex: '1',
   display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing(2),
-}));
+  flexDirection: 'column-reverse',
+  gap: '20px',
+});
 
-export const RectImage = styled('img')(({ theme }) => ({
+export const StyledImage = styled('img')(({ theme }) => ({
   width: '80%',
-  height: 'auto',
-  objectFit: 'cover',
+  borderRadius: '8px',
+
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+  },
 }));
 
-export const ArchImage = styled('img')(({ theme }) => ({
-  width: '60%',
-  height: 'auto',
-  objectFit: 'cover',
-  borderTopLeftRadius: '50%',
-  borderTopRightRadius: '50%',
-  overflow: 'hidden',
-}));
-
-export const TextContainer = styled(Box)(({ theme }) => ({
+export const TextContainer = styled(Box)({
   flex: '1',
-}));
+  minWidth: '300px',
+});
 
 export const Title = styled(Typography)(({ theme }) => ({
-  marginBottom: theme.spacing(2),
-  color: '#000'
+  marginBottom: '20px',
+
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '45px',
+  },
 }));
 
 export const Paragraph = styled(Typography)(({ theme }) => ({
-  marginBottom: theme.spacing(2),
-  color: '#000'
+  marginBottom: '10px',
+  fontWeight: 300,
+  fontSize: '30px',
+
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '18px',
+  },
 }));

@@ -1,13 +1,13 @@
-// src/components/Header/SubHeader.tsx
 import React, { useEffect } from "react";
-import { Box, Link as MuiLink, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { MenuItem, SelectChangeEvent, Button } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
-
-interface CategoryItem {
-  id: number;
-  name: string;
-}
+import { CategoryItem } from "../../types/Header.types";
+import {
+  SubHeaderContainer,
+  StyledSelect,
+  ButtonWrapper,
+  SelectWrapper,
+} from "./SubHeader.styles";
 
 const categories: CategoryItem[] = [
   { id: 1, name: "Букеты" },
@@ -18,65 +18,12 @@ const categories: CategoryItem[] = [
   { id: 6, name: "Монобукеты" },
 ];
 
-const SubHeaderContainer = styled(Box)(({ theme }) => ({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  gap: theme.spacing(4),
-  padding: theme.spacing(1, 2), 
-  backgroundColor: "#000000",
-  [theme.breakpoints.down("md")]: {
-    justifyContent: "space-between",
-    gap: theme.spacing(2),
-  },
-}));
-
-const FilterLink = styled(MuiLink)(({ theme }) => ({
-  color: "#ffffff",
-  textDecoration: "none",
-  fontWeight: 300,
-  
-  fontSize: "1rem",
-  cursor: "pointer",
-  "&:hover": {
-    color: theme.palette.primary.main,
-  },
-  [theme.breakpoints.down("md")]: {
-    display: "none",
-  },
-}));
-
-const StyledSelect = styled(Select)(({ theme }) => ({
-  display: "none",
-  color: "#ffffff",
-  backgroundColor: "#000000",
-  border: "none",
-  borderRadius: theme.shape.borderRadius,
-  "& .MuiSvgIcon-root": {
-    color: "#ffffff",
-    filter: "invert(1)",
-  },
-  "& .MuiSelect-select": {
-    padding: theme.spacing(1),
-    userSelect: "none",
-    WebkitTapHighlightColor: "transparent",
-    filter: "invert(1)",
-  },
-  [theme.breakpoints.down("md")]: {
-    display: "block",
-    width: "100%",
-    maxWidth: 250,
-    margin: "0 auto",
-  },
-}));
-
 const SubHeader: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const [selectedCategory, setSelectedCategory] = React.useState<string>("");
 
-  // Считываем категорию из URL при монтировании
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const cat = params.get("category") || "";
@@ -87,41 +34,39 @@ const SubHeader: React.FC = () => {
     navigate(`/catalog?category=${encodeURIComponent(catName)}`);
   }
 
-  function handleChange(e: SelectChangeEvent<string>) {
-    const catName = e.target.value;
+  function handleChange(e: SelectChangeEvent<unknown>) {
+    const catName = e.target.value as string;
     setSelectedCategory(catName);
     navigate(`/catalog?category=${encodeURIComponent(catName)}`);
   }
 
   return (
     <SubHeaderContainer>
-      {/* Ссылки для больших экранов */}
-      {categories.map((cat) => (
-        <FilterLink
-          key={cat.id}
-          component="button"
-          onClick={() => handleLinkClick(cat.name)}
-        >
-          {cat.name}
-        </FilterLink>
-      ))}
-
-      {/* Выпадающий список для мобильных */}
-      <StyledSelect
-        value={selectedCategory}
-        onChange={handleChange}
-        displayEmpty
-        inputProps={{ "aria-label": "Фильтр по категориям" }}
-      >
-        <MenuItem value="" disabled>
-          Выберите категорию
-        </MenuItem>
+      <ButtonWrapper>
         {categories.map((cat) => (
-          <MenuItem key={cat.id} value={cat.name}>
+          <Button key={cat.id} onClick={() => handleLinkClick(cat.name)}>
             {cat.name}
-          </MenuItem>
+          </Button>
         ))}
-      </StyledSelect>
+      </ButtonWrapper>
+
+      <SelectWrapper>
+        <StyledSelect
+          value={selectedCategory}
+          onChange={handleChange}
+          displayEmpty
+          renderValue={(selected) => {
+            return selected ? String(selected) : "Выберите категорию";
+          }}
+          inputProps={{ "aria-label": "Фильтр по категориям" }}
+        >
+          {categories.map((cat) => (
+            <MenuItem key={cat.id} value={cat.name}>
+              {cat.name}
+            </MenuItem>
+          ))}
+        </StyledSelect>
+      </SelectWrapper>
     </SubHeaderContainer>
   );
 };

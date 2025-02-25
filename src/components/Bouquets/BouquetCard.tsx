@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Snackbar, Alert } from "@mui/material";
+import { BouquetCardProps } from "../../types/BouquetCard.types";
 import {
   CardContainer,
   Image,
@@ -7,16 +9,6 @@ import {
   BuyButton,
   CardBottom,
 } from "./BouquetCard.styles";
-import { Snackbar, Alert } from "@mui/material";
-
-// Интерфейс для пропсов карточки
-interface BouquetCardProps {
-  img: string; // Полный URL к изображению
-  desc: string; // Описание букета
-  price: string; // Цена букета
-  onCardClick: () => void; // Клик по карточке
-  onBuyClick: () => void; // Кнопка "Купить"
-}
 
 const BouquetCard: React.FC<BouquetCardProps> = ({
   img,
@@ -27,22 +19,20 @@ const BouquetCard: React.FC<BouquetCardProps> = ({
 }) => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
-  // Открытие уведомления
   const handleBuyClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation(); // Предотвращаем всплытие события
-    onBuyClick(); // Вызываем переданный обработчик "Купить"
-    setSnackbarOpen(true); // Показываем уведомление
+    e.stopPropagation();
+    onBuyClick();
+    setSnackbarOpen(true);
   };
 
-  // Закрытие уведомления
   const handleSnackbarClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
   ) => {
     if (reason === "clickaway") {
-      return; // Игнорируем закрытие при клике вне уведомления
+      return;
     }
-    setSnackbarOpen(false); // Закрываем уведомление
+    setSnackbarOpen(false);
   };
 
   return (
@@ -56,7 +46,6 @@ const BouquetCard: React.FC<BouquetCardProps> = ({
         </CardBottom>
       </CardContainer>
 
-      {/* Уведомление */}
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={2000}

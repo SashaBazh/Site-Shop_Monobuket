@@ -7,12 +7,17 @@ export const AboutContainer = styled(Box)({
   margin: '0',
 });
 
+export const PageWrapper = styled(Box)({
+  backgroundColor: '#dcc7bd',
+  width: '100%',
+});
+
 export const ContentWrapper = styled(Box)({
   width: '100%',
-  padding: '0 20px', // Отступ справа и слева
+  padding: '0 20px',
   boxSizing: 'border-box',
   '@media (max-width: 768px)': {
-    padding: '0 0px 0 0px', // уменьшенные паддинги для мобильных
+    padding: '0 0px 0 0px',
   },
 });
 
@@ -33,7 +38,7 @@ export const SectionSubtitle1 = styled(Typography)({
   fontSize: '36px',
   fontWeight: '300',
   '@media (max-width: 768px)': {
-    margin: '0 0px 0 0px', // уменьшенные паддинги для мобильных
+    margin: '0 0px 0 0px',
   },
 });
 
@@ -45,7 +50,7 @@ export const SectionText = styled(Typography)(({ theme }) => ({
   padding: "0 130px 0 130px", 
   
   [theme.breakpoints.down('sm')]: {
-    padding: '0 20px 0 20px', // уменьшенный паддинг для мобильных устройств
+    padding: '0 20px 0 20px',
     fontSize: '24px',
 },
 }));
@@ -58,7 +63,7 @@ export const AboutImage = styled('img')({
   padding: "0 40px 0 40px",
 
   '@media (max-width: 768px)': {
-    padding: '0 0px 0 0px', // уменьшенные паддинги для мобильных
+    padding: '0 0px 0 0px',
   },
 });
 
@@ -70,7 +75,7 @@ export const AboutImage1 = styled('img')({
   padding: "0 40px 0 40px",
 
   '@media (max-width: 768px)': {
-    padding: '0 0px 0 0px', // уменьшенные паддинги для мобильных
+    padding: '0 0px 0 0px',
     margin: '0px 0',
   },
 });
@@ -91,7 +96,7 @@ export const CircleText = styled(Typography)({
     fontColor: '#fff',
     fontSize: '32px',
     fontWeight: '700',
-    fontFamily: 'Rozha One, serif', // Добавил шрифт Rozha One
+    fontFamily: 'Rozha One, serif',
  
     });
 
@@ -106,3 +111,34 @@ export const CircleText1 = styled(Typography)({
     
   },
 });
+
+export const MainText = styled(Typography)({
+  marginBottom: "10px",
+  fontWeight: 300,
+  fontSize: "30px",
+  padding: "10px",
+  "@media (max-width: 600px)": {
+    fontSize: "18px",
+  },
+});
+
+export const SubtitleText = styled(Typography)({
+  marginBottom: "10px",
+  fontWeight: 300,
+  fontSize: "36px",
+  padding: "10px",
+  "@media (max-width: 600px)": {
+    fontSize: "30px",
+  },
+});
+
+export const CircleTextStyled = styled(Typography)({
+  marginBottom: "10px",
+  fontWeight: 300,
+  fontSize: "25px",
+  padding: "10px",
+  "@media (max-width: 600px)": {
+    fontSize: "20px",
+  },
+});
+

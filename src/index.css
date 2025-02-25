@@ -62,15 +62,13 @@ button:focus-visible {
   }
 }
 
-
-/* Добавляем черный цвет для текста везде, кроме кнопок */
 * {
   color: #000 !important;
   font-family: 'Roboto', sans-serif;
 }
 
 body {
-  background-color: #fff; /* Основной фон сайта */
+  background-color: #fff;
 }
 
 button {
@@ -79,6 +77,6 @@ button {
 }
 
 footer {
-  background-color: #333; /* Темный фон для подвала */
+  background-color: #333;
   color: white;
 }

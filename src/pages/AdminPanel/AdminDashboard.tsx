@@ -1,16 +1,6 @@
-// src/pages/Admin/AdminDashboard.tsx
 import React, { useEffect, useState } from "react";
-import {
-  getCategories,
-  createCategory,
-  deleteCategory,
-  getProductsAll,
-  createProduct,
-  deleteProduct,
-  updateProduct,
-} from "../../api/adminAPI";
-import { useAuth } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useCategories } from "../../components/Admin/useCategories";
+import { useProducts } from "../../components/Admin/useProducts";
 import {
   Container,
   Typography,
@@ -32,24 +22,46 @@ import {
   DialogActions,
   IconButton,
 } from "@mui/material";
-import {
-  Delete as DeleteIcon,
-  Edit as EditIcon,
-  Add as AddIcon,
-} from "@mui/icons-material";
+import { Delete as DeleteIcon, Edit as EditIcon, Add as AddIcon } from "@mui/icons-material";
+
+interface Category {
+  id: number;
+  name: string;
+}
+
+interface Product {
+  id: number;
+  category_id: number;
+  name: string;
+  price: number;
+  description?: string;
+}
 
 export default function AdminDashboard() {
-  const { user } = useAuth();
-  const navigate = useNavigate();
+  const {
+    categories,
+    error: categoriesError,
+    loadCategories,
+    handleCreateCategory,
+    handleDeleteCategory,
+  } = useCategories();
 
-  const [categories, setCategories] = useState<any[]>([]);
-  const [products, setProducts] = useState<any[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const {
+    products,
+    error: productsError,
+    editDialogOpen,
+    editProductData,
+    loadProducts,
+    handleCreateProduct,
+    handleDeleteProduct,
+    openEditDialog,
+    closeEditDialog,
+    handleEditProduct,
+    setEditProductData,
+  } = useProducts();
 
-  // Для формы добавления категории
   const [newCategoryName, setNewCategoryName] = useState("");
 
-  // Для формы добавления товара
   const [newProductData, setNewProductData] = useState({
     name: "",
     price: "",
@@ -58,156 +70,11 @@ export default function AdminDashboard() {
     files: [] as File[],
   });
 
-  // Для редактирования товара
-  const [editDialogOpen, setEditDialogOpen] = useState(false);
-  const [currentProduct, setCurrentProduct] = useState<any>(null);
-  const [editProductData, setEditProductData] = useState({
-    name: "",
-    price: "",
-  });
-
-  // Загрузить категории + товары
+  // Загрузить данные при монтировании
   useEffect(() => {
-    loadData();
-  }, []);
-
-  async function loadData() {
-    try {
-      setError(null);
-
-      const catRes = await getCategories();
-      setCategories(catRes);
-
-      const prodRes = await getProductsAll();
-      setProducts(prodRes);
-    } catch (err: any) {
-      setError(err.message || "Ошибка при загрузке данных");
-    }
-  }
-
-  // === CATEGORY CRUD ===
-  async function handleCreateCategory(e: React.FormEvent) {
-    e.preventDefault();
-    if (!newCategoryName.trim()) return;
-
-    try {
-      await createCategory({ name: newCategoryName.trim() });
-      setNewCategoryName("");
-      await loadData();
-    } catch (err: any) {
-      alert("Ошибка при создании категории: " + err.message);
-    }
-  }
-
-  async function handleDeleteCategory(catId: number) {
-    if (!window.confirm("Удалить категорию?")) return;
-    try {
-      await deleteCategory(catId);
-      await loadData();
-    } catch (err: any) {
-      alert("Ошибка при удалении категории: " + err.message);
-    }
-  }
-
-  // === PRODUCT CRUD ===
-  // Добавить товар
-  async function handleCreateProduct(e: React.FormEvent) {
-    e.preventDefault();
-
-    // Проверка полей
-    if (
-      !newProductData.name.trim() ||
-      !newProductData.price ||
-      !newProductData.categoryId
-    ) {
-      alert("Пожалуйста, заполните все обязательные поля.");
-      return;
-    }
-
-    // Собираем FormData
-    const formData = new FormData();
-    const productPayload = {
-      category_id: Number(newProductData.categoryId),
-      name: newProductData.name.trim(),
-      price: Number(newProductData.price),
-      description: newProductData.description.trim(),
-    };
-
-    formData.append("product_data", JSON.stringify(productPayload));
-
-    for (const file of newProductData.files) {
-      formData.append("files", file);
-    }
-
-    try {
-      await createProduct(formData);
-      setNewProductData({
-        name: "",
-        price: "",
-        categoryId: "",
-        description: "",
-        files: [],
-      });
-      await loadData();
-    } catch (err: any) {
-      alert("Ошибка при создании товара: " + err.message);
-    }
-  }
-
-  // Удалить товар
-  async function handleDeleteProduct(productId: number) {
-    if (!window.confirm("Удалить товар?")) return;
-    try {
-      await deleteProduct(productId);
-      await loadData();
-    } catch (err: any) {
-      alert("Ошибка при удалении товара: " + err.message);
-    }
-  }
-
-  // Открыть диалог редактирования
-  function openEditDialog(prod: any) {
-    setCurrentProduct(prod);
-    setEditProductData({
-      name: prod.name,
-      price: String(prod.price),
-    });
-    setEditDialogOpen(true);
-  }
-
-  // Закрыть диалог редактирования
-  function closeEditDialog() {
-    setEditDialogOpen(false);
-    setCurrentProduct(null);
-  }
-
-  // Редактировать товар
-  async function handleEditProduct() {
-    if (
-      !editProductData.name.trim() ||
-      !editProductData.price ||
-      !currentProduct
-    ) {
-      alert("Пожалуйста, заполните все обязательные поля.");
-      return;
-    }
-
-    try {
-      const formData = new FormData();
-      const productPayload = {
-        id: currentProduct.id,
-        name: editProductData.name.trim(),
-        price: Number(editProductData.price),
-      };
-      formData.append("product_data", JSON.stringify(productPayload));
-
-      await updateProduct(formData);
-      await loadData();
-      closeEditDialog();
-    } catch (err: any) {
-      alert("Ошибка при обновлении товара: " + err.message);
-    }
-  }
+    loadCategories();
+    loadProducts();
+  }, [loadCategories, loadProducts]);
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -215,9 +82,9 @@ export default function AdminDashboard() {
         Админ-панель
       </Typography>
 
-      {error && (
+      {(categoriesError || productsError) && (
         <Alert severity="error" sx={{ mb: 3 }}>
-          {error}
+          {categoriesError || productsError}
         </Alert>
       )}
 
@@ -236,7 +103,7 @@ export default function AdminDashboard() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {categories.map((cat) => (
+              {categories.map((cat: Category) => (
                 <TableRow key={cat.id}>
                   <TableCell>{cat.id}</TableCell>
                   <TableCell>{cat.name}</TableCell>
@@ -261,7 +128,14 @@ export default function AdminDashboard() {
           </Table>
         </TableContainer>
 
-        <Box component="form" onSubmit={handleCreateCategory} sx={{ mt: 3 }}>
+        <Box
+          component="form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleCreateCategory(newCategoryName);
+          }}
+          sx={{ mt: 3 }}
+        >
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12} sm={9}>
               <TextField
@@ -303,7 +177,7 @@ export default function AdminDashboard() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {products.map((prod) => (
+              {products.map((prod: Product) => (
                 <TableRow key={prod.id}>
                   <TableCell>{prod.id}</TableCell>
                   <TableCell>{prod.category_id}</TableCell>
@@ -336,7 +210,14 @@ export default function AdminDashboard() {
           </Table>
         </TableContainer>
 
-        <Box component="form" onSubmit={handleCreateProduct} sx={{ mt: 3 }}>
+        <Box
+          component="form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleCreateProduct(newProductData);
+          }}
+          sx={{ mt: 3 }}
+        >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField

@@ -1,86 +1,44 @@
-import React from 'react';
-import { Box, Typography, useMediaQuery } from '@mui/material';
-import { motion } from 'framer-motion';
-import finalRect from '../../assets/images/final_rect.jpg'; // Импортируем изображение как переменную
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  FinalBlockContainer,
+  ImagesContainer,
+  StyledImage,
+  TextContainer,
+  Title,
+  Paragraph,
+} from "./FinalBlock.styles";
+
+const MotionFinalBlockContainer = motion(FinalBlockContainer);
 
 const FinalBlock: React.FC = () => {
-  const isMobile = useMediaQuery('(max-width:600px)');
-
   return (
-    <Box
-      component={motion.div}
+    <MotionFinalBlockContainer
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      sx={{
-        display: 'flex',
-        flexDirection: isMobile ? 'column-reverse' : 'row',
-        gap: '40px',
-        padding: isMobile ? '20px' : '60px',
-        backgroundColor: '#E2DCD3',
-        alignItems: 'flex-start',
-      }}
     >
-      <Box sx={{ flex: '1', display: 'flex', flexDirection: 'reverse-column', gap: '20px' }}>
-        <Box
-          component="img"
-          src={finalRect} // Используем переменную
-          alt="final-rect"
-          sx={{
-            width: isMobile ? '100%' : '80%',
-            borderRadius: '8px',
-          }}
-        />
-      </Box>
+      <ImagesContainer>
+        <StyledImage src="./assets/images/final_rect.jpg" alt="final-rect" />
+      </ImagesContainer>
 
-      <Box sx={{ flex: '1', minWidth: '300px' }}>
-        <Typography variant="h2" sx={{ marginBottom: '20px', "@media (max-width: 600px)": {
-      fontSize: "45px", // Шрифт для экранов меньше 600px
-    }, }}>
-          Цветы и букеты с доставкой
-          </Typography>
-          <Typography
-  variant="body1"
-  sx={{
-    marginBottom: "10px",
-    fontWeight: 300,
-    fontSize: "30px",
-    "@media (max-width: 600px)": {
-      fontSize: "18px", // Шрифт для экранов меньше 600px
-    },
-  }}
->
-
-
-          Мы – команда настоящих энтузиастов, которые обожают цветы и знают, как сделать ваш день ярче!
-      </Typography>
-      <Typography
-  variant="body1"
-  sx={{
-    marginBottom: "10px",
-    fontWeight: 300,
-    fontSize: "30px",
-    "@media (max-width: 600px)": {
-      fontSize: "18px", // Шрифт для экранов меньше 600px
-    },
-  }}>
-          Каждую неделю мы осуществляем свежие поставки цветов 3-4 раза, чтобы у нас всегда были самые лучшие и красивые букеты для вас.
-        </Typography>
-        <Typography
-  variant="body1"
-  sx={{
-    marginBottom: "10px",
-    fontWeight: 300,
-    fontSize: "30px",
-    "@media (max-width: 600px)": {
-      fontSize: "18px", // Шрифт для экранов меньше 600px
-    },
-  }}>
-          Мы готовы доставить цветы прямо к Вашему порогу – быстро и удобно. При этом доставка бесплатна при заказе от 120 рублей.
-        </Typography>
-      </Box>
-    </Box>
+      <TextContainer>
+        <Title variant="h2">Цветы и букеты с доставкой</Title>
+        <Paragraph variant="body1">
+          Мы – команда настоящих энтузиастов, которые обожают цветы и знают, как
+          сделать ваш день ярче!
+        </Paragraph>
+        <Paragraph variant="body1">
+          Каждую неделю мы осуществляем свежие поставки цветов 3-4 раза, чтобы у
+          нас всегда были самые лучшие и красивые букеты для вас.
+        </Paragraph>
+        <Paragraph variant="body1">
+          Мы готовы доставить цветы прямо к Вашему порогу – быстро и удобно. При
+          этом доставка бесплатна при заказе от 120 рублей.
+        </Paragraph>
+      </TextContainer>
+    </MotionFinalBlockContainer>
   );
 };
 

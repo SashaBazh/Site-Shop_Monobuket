@@ -1,7 +1,6 @@
 import { styled, keyframes } from "@mui/material/styles";
 import { Box, Button, Typography } from "@mui/material";
 
-// Анимация появления карточки
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -13,82 +12,71 @@ const fadeIn = keyframes`
   }
 `;
 
-// Контейнер для карточки с базовыми стилями
 export const CardContainer = styled(Box)(({ theme }) => ({
   width: "100%",
-  maxWidth: "280px", // Максимальная ширина карточки
+  maxWidth: "280px",
   display: "flex",
   flexDirection: "column",
-  textAlign: "left", // Выравнивание текста по левому краю
+  textAlign: "left",
   backgroundColor: "#dcc7bd",
-  padding: theme.spacing(0.01), // Общие отступы внутри карточки
-  animation: `${fadeIn} 0.2s ease-in-out`, // Применение анимации
-  borderRadius: "8px", // Слегка закругленные углы
-  transition: "box-shadow 0.3s ease-in-out", // Плавное изменение тени при наведении
+  padding: theme.spacing(0.01),
+  animation: `${fadeIn} 0.2s ease-in-out`,
+  borderRadius: "8px",
+  transition: "box-shadow 0.3s ease-in-out",
   "&:hover": {
-    boxShadow: "0 8px 12px rgba(0, 0, 0, 0.2)", // Увеличенная тень при наведении
+    boxShadow: "0 8px 12px rgba(0, 0, 0, 0.2)",
   },
 }));
 
-// Стили для изображения в карточке
 export const Image = styled("img")(({ theme }) => ({
   width: "100%",
-  height: "200px", // Фиксированная высота для всех изображений
-  objectFit: "cover", // Центрирование и обрезка изображения
-  borderRadius: "4px", // Слегка закругленные углы изображения
+  height: "200px",
+  objectFit: "cover",
+  borderRadius: "4px",
   marginBottom: theme.spacing(0.2),
 }));
 
-// Стили для описания карточки
 export const Description = styled(Typography)(({ theme }) => ({
   marginBottom: theme.spacing(2),
   color: "#000",
   fontWeight: 300,
   fontSize: "1rem",
-  overflow: "hidden", // Скрытие избыточного текста
-  display: "-webkit-box", // Использование веб-кит боксов для ограничения строк
+  overflow: "hidden",
+  display: "-webkit-box",
   WebkitBoxOrient: "vertical",
-  WebkitLineClamp: 2, // Ограничение текста в 2 строки
-  textOverflow: "ellipsis", // Добавление троеточия
-  height: "1.2rem", // Фиксированная высота для одинакового размера
+  WebkitLineClamp: 2,
+  textOverflow: "ellipsis",
+  height: "1.2rem",
 }));
 
-
-
-// Контейнер для нижней части карточки (цена и кнопка)
 export const CardBottom = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
   marginTop: theme.spacing(0.2),
-
 }));
 
-// Стили для текста цены
 export const Price = styled(Typography)(({ theme }) => ({
   fontWeight: 400,
   color: "#000",
   fontSize: "1rem",
   [theme.breakpoints.down("sm")]: {
-    fontSize: "0.85rem", // Например, ~14px
+    fontSize: "0.85rem",
   },
 }));
 
-// Стили для кнопки "Купить"
 export const BuyButton = styled(Button)(({ theme }) => ({
-  textTransform: "none", // Отключение преобразования текста в верхний регистр
-  backgroundColor: "#443C41", // Чёрный фон кнопки
-  color: "#fff", // Белый текст
-  padding: theme.spacing(0.5, 2), // Отступы кнопки
+  textTransform: "none",
+  backgroundColor: "#443C41",
+  color: "#fff",
+  padding: theme.spacing(0.5, 2),
   fontSize: "1rem",
   fontWeight: 300,
-  borderRadius: "4px", // Небольшое закругление кнопки
+  borderRadius: "4px",
   "&:hover": {
-    backgroundColor: "#333", // Тёмный фон при наведении
+    backgroundColor: "#333",
   },
   [theme.breakpoints.down("sm")]: {
-    fontSize: "0.85rem", // Например, ~14px
+    fontSize: "0.85rem",
   },
 }));
-
-
