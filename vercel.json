@@ -8,7 +8,7 @@
   "routes": [
     {
       "src": "/sitemap.xml",
-      "dest": "https://api.monobuket.by/api/sitemap.xml"
+      "dest": "https://api.monobuket.by/api/sitemap.xml" 
     }
   ]
 }
