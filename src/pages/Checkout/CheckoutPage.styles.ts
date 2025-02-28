@@ -62,10 +62,10 @@ export const SubmitButton = styled(Button)(({ theme }) => ({
 
 export const BackButton = styled(Button)(({ theme }) => ({
   padding: theme.spacing(2),
-  backgroundColor: '#F1C6C1',
-  color: '#B07889',
+  backgroundColor: '#D99B96', // Сделано темнее
+  color: '#8A5A63', // Соответствующее затемнение текста
   '&:hover': {
-    backgroundColor: '#FFB5C1'
+    backgroundColor: '#C08884' // Темнее при наведении
   },
   fontWeight: 300,
   textTransform: 'none',

@@ -80,6 +80,9 @@ export const PrimaryButton = styled(Button)(({ theme }) => ({
     padding: "12px 20px",
     fontSize: "0.9rem",
   },
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+  },
 }));
 
 export const SecondaryButton = styled(Button)(({ theme }) => ({
@@ -99,6 +102,9 @@ export const SecondaryButton = styled(Button)(({ theme }) => ({
     padding: "12px 20px",
     fontSize: "0.9rem",
   },
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+  },
 }));
 
 export const ProductDetailsContainer = styled(Box)(({ theme }) => ({
@@ -112,20 +118,28 @@ export const ProductDetailsContainer = styled(Box)(({ theme }) => ({
   width: "100%",
 }));
 
-export const ProductInfoContainer = styled(Box)(() => ({
+export const ProductInfoContainer = styled(Box)(({ theme }) => ({
   flex: 2,
+  textAlign: "left",
+  [theme.breakpoints.down("sm")]: {
+    textAlign: "center",
+    alignItems: "center",
+    width: "100%",
+  },
 }));
 
 export const ButtonsContainer = styled(Box)(({ theme }) => ({
   display: "flex",
-  flexDirection: "column",
-  [theme.breakpoints.up("sm")]: {
-    flexDirection: "row",
-  },
+  flexDirection: "row",
   gap: theme.spacing(2),
   alignItems: "center",
   justifyContent: "flex-start",
   marginTop: theme.spacing(3),
+
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column",
+    width: "100%",
+  },
 }));
 
 export const RelatedProductsContainer = styled(Box)(({ theme }) => ({

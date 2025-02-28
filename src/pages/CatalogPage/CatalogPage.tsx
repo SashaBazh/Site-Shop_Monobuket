@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { Grid, Alert, CircularProgress, Snackbar } from "@mui/material";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import MainHeader from "../../components/Header/MainHeader";
 import SubHeader from "../../components/Header/SubHeader";
@@ -33,10 +33,8 @@ export default function CatalogPage() {
   const [searchValue, setSearchValue] = useState("");
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 9999]);
   const [sortBy, setSortBy] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
-  const [searchParams] = useSearchParams();
-  const categoryFromUrl = searchParams.get("category") || "";
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(15);
@@ -53,64 +51,62 @@ export default function CatalogPage() {
       setLoading(true);
       setError(null);
       try {
-        // Fetch categories
-        const catRes = await getProductsByCategory(0);
+        // Загрузить все категории
+        const catRes = await getProductsByCategory(0); // Загрузить все категории
         const categories = Array.isArray(catRes) ? catRes : [];
         setCategories(categories);
         setBouquetTypes(categories.map((c) => c.name));
-
-        // Fetch products
-        const products = await getAllProducts();
-        setAllProducts(Array.isArray(products) ? products : []);
-      } catch (err) {
-        console.error("Ошибка при загрузке товаров/категорий:", err);
-        setError("Ошибка при загрузке товаров/категорий");
+        
+        // Загрузить товары по выбранной категории
+        if (selectedCategory) {
+          const fetchCategoryProducts = async () => {
+            try {
+              // Получаем товары по ID категории
+              const data = await getProductsByCategory(selectedCategory);
+              setAllProducts(data); // Сохраняем товары в состояние
+            } catch (error) {
+              console.error("Ошибка при загрузке товаров по категории:", error);
+              setError("Не удалось загрузить товары по выбранной категории.");
+            }
+          };
+          fetchCategoryProducts();
+        } else {
+          // Если категория не выбрана, можно загрузить все товары
+          const data = await getAllProducts();
+          setAllProducts(data); // Загружаем все товары, если категория не выбрана
+        }
+      } catch (error) {
+        console.error("Ошибка при загрузке данных:", error);
+        setError("Произошла ошибка при загрузке данных.");
       } finally {
         setLoading(false);
       }
     };
+  
     fetchData();
-  }, []);
-
-  useEffect(() => {
-    if (categoryFromUrl) {
-      setSearchValue("");
-      setPriceRange([0, 9999]);
-      setSortBy("");
-      setSelectedCategory(categoryFromUrl);
-      setCurrentPage(1);
-    }
-  }, [categoryFromUrl]);
+  }, [selectedCategory]); // Этот useEffect сработает, когда selectedCategory изменится
 
   const filteredProducts = useMemo(() => {
     return allProducts.filter((product) => {
       const nameLower = product.name.toLowerCase();
       const searchLower = searchValue.toLowerCase();
       const matchesSearch = nameLower.includes(searchLower);
-
-      let matchesCategoryFromUrl = true;
-      if (categoryFromUrl) {
-        const catObj = categories.find((cat) => cat.name === categoryFromUrl);
-        if (catObj) {
-          matchesCategoryFromUrl = product.category_id === catObj.id;
-        }
-      }
-
-      let matchesSelectedCategory = true;
+  
+      let matchesCategory = true;
       if (selectedCategory) {
-        const catObj = categories.find((cat) => cat.name === selectedCategory);
+        const catObj = categories.find((cat) => cat.id === selectedCategory); // Ищем категорию по числовому id
         if (catObj) {
-          matchesSelectedCategory = product.category_id === catObj.id;
+          matchesCategory = product.category_id === catObj.id;
         }
       }
-
+  
       const [minP, maxP] = priceRange;
       const matchesPrice = product.price >= minP && product.price <= maxP;
-
-      return matchesSearch && matchesCategoryFromUrl && matchesSelectedCategory && matchesPrice;
+  
+      return matchesSearch && matchesCategory && matchesPrice;
     });
-  }, [allProducts, categories, searchValue, categoryFromUrl, selectedCategory, priceRange]);
-
+  }, [allProducts, categories, searchValue, selectedCategory, priceRange]);
+  
   const sortedProducts = useMemo(() => {
     const arr = [...filteredProducts];
     if (sortBy === "по возрастанию") {
@@ -162,9 +158,10 @@ export default function CatalogPage() {
     setSearchValue("");
     setPriceRange([0, 9999]);
     setSortBy("");
-    setSelectedCategory("");
+    setSelectedCategory(null); // передаем null для сброса категории
     navigate("/catalog", { replace: true });
   };
+  
 
   return (
     <>

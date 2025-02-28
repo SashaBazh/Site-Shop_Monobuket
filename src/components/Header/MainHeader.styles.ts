@@ -60,6 +60,7 @@ export const DrawerContainer = styled(Box)(({ theme }) => ({
   height: "100%",
   paddingTop: theme.spacing(2),
   fontWeight: 300,
+  marginTop: "50px"
 }));
 
 export const DrawerCloseButton = styled(IconButton)(({ theme }) => ({

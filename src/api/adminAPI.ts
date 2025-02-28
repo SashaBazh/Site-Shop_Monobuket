@@ -1,3 +1,4 @@
+import { OrderStatus } from "../types/Admin.types";
 import axiosInstance from "./axiosInstance";
 
 export async function getCategories() {
@@ -38,5 +39,20 @@ export async function deleteProduct(productId: number) {
 
 export async function updateProduct(formData: FormData) {
   const res = await axiosInstance.put("/products", formData);
+  return res.data;
+}
+
+export async function getOrders() {
+  const res = await axiosInstance.get("/cart/orders");
+  return res.data;
+}
+
+export async function getOrderDetails(orderId: number) {
+  const res = await axiosInstance.get(`/cart/order/${orderId}`);
+  return res.data;
+}
+
+export async function updateOrderStatus(orderId: number, orderStatus: OrderStatus) {
+  const res = await axiosInstance.put(`/cart/order/${orderId}?order_status=${orderStatus}`);
   return res.data;
 }

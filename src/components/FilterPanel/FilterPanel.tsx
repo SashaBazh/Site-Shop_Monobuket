@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   IconButton,
@@ -19,6 +19,7 @@ import {
   PriceOption,
   SortOption,
 } from "../../types/Filters.types";
+import { getCategories } from "../../api/adminAPI"; // Импортируем функцию getCategories
 import {
   filterPanelContainer,
   searchBox,
@@ -49,12 +50,26 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   onSortByChange,
   selectedCategory,
   onCategoryChange,
-  bouquetTypes,
   onClearFilters,
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [menuType, setMenuType] = useState<"price" | "sort" | "category">();
+  const [categories, setCategories] = useState<{ id: number; name: string }[]>([]); // Состояние для категорий
+
   const open = Boolean(anchorEl);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const data = await getCategories();
+        setCategories(data); // Сохраняем категории в состояние
+      } catch (error) {
+        console.error("Ошибка при загрузке категорий:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const handleMenuOpen =
     (type: "price" | "sort" | "category") =>
@@ -68,14 +83,14 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
     setMenuType(undefined);
   };
 
-  const handleMenuItemClick = (value: string) => {
+  const handleMenuItemClick = (value: string | number) => {
     if (menuType === "price") {
-      const [minStr, maxStr] = value.split("-");
+      const [minStr, maxStr] = value.toString().split("-");
       onPriceRangeChange([Number(minStr), Number(maxStr)]);
     } else if (menuType === "sort") {
-      onSortByChange(value);
+      onSortByChange(value.toString());
     } else if (menuType === "category") {
-      onCategoryChange(value);
+      onCategoryChange(Number(value)); // Преобразуем значение в ID категории
     }
     handleMenuClose();
   };
@@ -147,7 +162,12 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
       <Box sx={activeFiltersContainer}>
         {searchValue && <Chip label={`Поиск: ${searchValue}`} />}
         {selectedCategory && (
-          <Chip label={`Категория: ${selectedCategory}`} />
+          <Chip
+            label={`Категория: ${
+              categories.find((cat) => cat.id === selectedCategory)?.name ||
+              "Не выбрано"
+            }`}
+          />
         )}
         {(priceRange[0] !== 0 || priceRange[1] !== 9999) && (
           <Chip label={`Цена: ${priceRange[0]}-${priceRange[1]} руб.`} />
@@ -185,18 +205,19 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
           ))}
 
         {menuType === "category" &&
-          bouquetTypes.map((type) => (
+          categories.map((category) => (
             <MenuItem
-              key={type}
-              selected={selectedCategory === type}
-              onClick={() => handleMenuItemClick(type)}
+              key={category.id}
+              selected={selectedCategory === category.id}
+              onClick={() => handleMenuItemClick(category.id)} // Передаем ID категории
             >
-              {type}
+              {category.name}
             </MenuItem>
           ))}
       </Menu>
     </>
   );
 };
+
 
 export default FilterPanel;

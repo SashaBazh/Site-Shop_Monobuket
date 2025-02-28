@@ -35,6 +35,7 @@ import {
   SubmitButton,
   BackButton,
 } from "./CheckoutPage.styles";
+import { getImageUrl } from "../../api/config";
 
 const initialFormData: FormData = {
   sender_name: "",
@@ -70,7 +71,7 @@ const CheckoutPage: React.FC = () => {
 
   const getDeliveryPrice = (): number => {
     if (formData.delivery_type === "delivery") {
-      return 10.0;
+      return 15.0;
     }
     return 0;
   };
@@ -151,10 +152,8 @@ const CheckoutPage: React.FC = () => {
           {cartItems.map((item: CartItem) => (
             <ListItem key={item.id}>
               <ListItemContainer>
-                <ProductImage
-                  src={item.image || "/assets/images/default.jpg"}
-                  alt={item.name}
-                />
+                <ProductImage src={getImageUrl(item.image)} alt={item.name} />
+
                 <ListItemText
                   primary={item.name}
                   secondary={
@@ -238,7 +237,7 @@ const CheckoutPage: React.FC = () => {
               <FormControlLabel
                 value="delivery"
                 control={<Radio />}
-                label="Доставка (10 руб.)"
+                label="Доставка (15 руб.)"
               />
             </RadioGroup>
           </FormControl>

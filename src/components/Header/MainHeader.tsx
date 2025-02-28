@@ -11,7 +11,6 @@ import {
   ListItemButton,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
 import { useCart } from "../../context/CartContext";
 
 import {
@@ -21,7 +20,6 @@ import {
   Logo,
   Placeholder,
   DrawerContainer,
-  DrawerCloseButton,
   StyledAppBar,
 } from "./MainHeader.styles";
 
@@ -85,7 +83,7 @@ const MainHeader: React.FC = () => {
               </NavRightContainer>
             )}
 
-            {!isExtraSmall && (
+            {!isExtraSmall && ( // Корзина отображается вне бургер-меню только если ширина больше 350px
               <IconButton component={Link} to="/cart">
                 <Badge badgeContent={totalItems} color="error">
                   <img
@@ -112,10 +110,6 @@ const MainHeader: React.FC = () => {
 
         <Drawer anchor="right" open={isDrawerOpen} onClose={toggleDrawer}>
           <DrawerContainer>
-            <DrawerCloseButton onClick={toggleDrawer}>
-              <CloseIcon />
-            </DrawerCloseButton>
-
             <List>
               <ListItemButton
                 component={Link}
@@ -143,8 +137,19 @@ const MainHeader: React.FC = () => {
                 to="/catalog"
                 onClick={toggleDrawer}
               >
-                <ListItemText primary="Корзина" />
+                <ListItemText primary="Каталог" />
               </ListItemButton>
+
+              {/* Добавляем корзину в Drawer, только если ширина экрана меньше 350px */}
+              {isExtraSmall && (
+                <ListItemButton
+                  component={Link}
+                  to="/cart"
+                  onClick={toggleDrawer}
+                >
+                  <ListItemText primary={`Корзина (${totalItems})`} />
+                </ListItemButton>
+              )}
             </List>
           </DrawerContainer>
         </Drawer>
@@ -154,5 +159,6 @@ const MainHeader: React.FC = () => {
     </>
   );
 };
+
 
 export default MainHeader;

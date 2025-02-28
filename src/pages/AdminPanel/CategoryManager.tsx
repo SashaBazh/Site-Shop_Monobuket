@@ -1,104 +1,121 @@
-// src/pages/Admin/CategoryManager.tsx
-import React, { useEffect, useState } from "react";
-import axiosInstance from "../../api/axiosInstance";
-import { Form, Button, Table } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import { getCategories, createCategory, deleteCategory } from '../../api/adminAPI';
+import { Category } from '../../types/Admin.types';
+import { CategoryManagerStyles } from './CategoryManager.styles';
+import Notification from '../../components/Admin/Notification';
 
-interface Category {
-  id: number;
-  name: string;
-  description?: string;
-  image?: string;
-}
-
-export default function CategoryManager() {
+const CategoryManager: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [newName, setNewName] = useState("");
+  const [newCategoryName, setNewCategoryName] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [notification, setNotification] = useState<{ message: string, type: 'success' | 'error' } | null>(null);
+
+  const fetchCategories = async () => {
+    try {
+      setLoading(true);
+      const data = await getCategories();
+      setCategories(data);
+    } catch (error) {
+      console.error('Ошибка загрузки категорий:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCreateCategory = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newCategoryName.trim()) return;
+
+    try {
+      setLoading(true);
+      await createCategory({ name: newCategoryName });
+      setNewCategoryName('');
+      fetchCategories();
+      setNotification({ message: 'Категория успешно добавлена!', type: 'success' });
+    } catch (error) {
+      console.error('Ошибка создания категории:', error);
+      setNotification({ message: 'Ошибка при добавлении категории.', type: 'error' });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteCategory = async (id: number) => {
+    if (!window.confirm('Вы уверены, что хотите удалить эту категорию?')) return;
+
+    try {
+      setLoading(true);
+      await deleteCategory(id);
+      fetchCategories();
+      setNotification({ message: 'Категория успешно удалена!', type: 'success' });
+    } catch (error) {
+      console.error('Ошибка удаления категории:', error);
+      setNotification({ message: 'Ошибка при удалении категории.', type: 'error' });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     fetchCategories();
   }, []);
 
-  async function fetchCategories() {
-    try {
-      const res = await axiosInstance.get<Category[]>("/products/category");
-      setCategories(res.data);
-    } catch (err) {
-      console.error("Ошибка при загрузке категорий", err);
+  // Таймер для скрытия уведомления через 3 секунды
+  useEffect(() => {
+    if (notification) {
+      const timer = setTimeout(() => {
+        setNotification(null);
+      }, 2000); // 3 секунды в миллисекундах
+
+      return () => clearTimeout(timer); // очищаем таймер, если компонент размонтируется
     }
-  }
-
-  async function handleCreate(e: React.FormEvent) {
-    e.preventDefault();
-    if (!newName.trim()) return;
-
-    try {
-      // Подготовим данные
-      const categoryData = { name: newName };
-      const formData = new FormData();
-      formData.append("category_data", JSON.stringify(categoryData));
-
-      // Если нужно загрузить файл: formData.append("image", fileInput.files[0]);
-
-      await axiosInstance.post("/products/categories", formData);
-      setNewName("");
-      fetchCategories();
-    } catch (err) {
-      console.error("Ошибка при создании категории:", err);
-    }
-  }
-
-  async function handleDelete(id: number) {
-    if (!window.confirm("Точно удалить категорию?")) return;
-    try {
-      await axiosInstance.delete(`/products/categories/${id}`);
-      fetchCategories();
-    } catch (err) {
-      console.error("Ошибка при удалении категории:", err);
-    }
-  }
+  }, [notification]);
 
   return (
-    <div>
-      <h4>Управление категориями</h4>
-      <Form onSubmit={handleCreate} className="d-flex mb-3" style={{ gap: "8px" }}>
-        <Form.Control
-          type="text"
-          placeholder="Название категории"
-          value={newName}
-          onChange={(e) => setNewName(e.target.value)}
-        />
-        <Button type="submit" variant="primary">
-          Создать
-        </Button>
-      </Form>
+    <div style={CategoryManagerStyles.container}>
+      <h2 style={CategoryManagerStyles.title}>Управление категориями</h2>
 
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Название</th>
-            <th>Действия</th>
-          </tr>
-        </thead>
-        <tbody>
-          {categories.map((cat) => (
-            <tr key={cat.id}>
-              <td>{cat.id}</td>
-              <td>{cat.name}</td>
-              <td>
-                <Button
-                  variant="danger"
-                  size="sm"
-                  onClick={() => handleDelete(cat.id)}
-                >
-                  Удалить
-                </Button>
-                {/* Для редактирования (PUT /products/categories) можно сделать отдельный Modal */}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      {/* Уведомление */}
+      {notification && <Notification message={notification.message} type={notification.type} />}
+
+      <form onSubmit={handleCreateCategory} style={CategoryManagerStyles.form}>
+        <input
+          type="text"
+          value={newCategoryName}
+          onChange={(e) => setNewCategoryName(e.target.value)}
+          placeholder="Название новой категории"
+          disabled={loading}
+          style={CategoryManagerStyles.input}
+        />
+        <button
+          type="submit"
+          disabled={loading}
+          style={loading ? { ...CategoryManagerStyles.button, ...CategoryManagerStyles.buttonDisabled } : CategoryManagerStyles.button}
+        >
+          Добавить категорию
+        </button>
+      </form>
+
+      {loading && <p style={CategoryManagerStyles.loadingMessage}>Загрузка...</p>}
+
+      <ul style={CategoryManagerStyles.list}>
+        {categories.map((category) => (
+          <li key={category.id} style={CategoryManagerStyles.listItem}>
+            <span>{category.name}</span>
+            <button
+              onClick={() => handleDeleteCategory(category.id)}
+              disabled={loading}
+              style={CategoryManagerStyles.deleteButton}
+            >
+              Удалить
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      {categories.length === 0 && !loading && <p style={CategoryManagerStyles.emptyMessage}>Нет доступных категорий</p>}
     </div>
   );
-}
+};
+
+export default CategoryManager;

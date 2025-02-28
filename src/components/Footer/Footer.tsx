@@ -30,8 +30,8 @@ const Footer: React.FC = () => {
             sx={logoStyle}
             onClick={() => handleNavigation("/")}
           />
-          <div>Адрес: г. Москва, ул. Цветочная, д.1</div>
-          <div>Тел: +7 (999) 123-45-67</div>
+          <div>Адрес: г.Минск, ул.Леонида Беды 46 Тц 4 сезона</div>
+          <div>Тел: +375336029359</div>
         </Box>
 
         <Box>

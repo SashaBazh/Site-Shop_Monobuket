@@ -22,10 +22,6 @@ export const CardContainer = styled(Box)(({ theme }) => ({
   padding: theme.spacing(0.01),
   animation: `${fadeIn} 0.2s ease-in-out`,
   borderRadius: "8px",
-  transition: "box-shadow 0.3s ease-in-out",
-  "&:hover": {
-    boxShadow: "0 8px 12px rgba(0, 0, 0, 0.2)",
-  },
 }));
 
 export const Image = styled("img")(({ theme }) => ({
@@ -37,10 +33,10 @@ export const Image = styled("img")(({ theme }) => ({
 }));
 
 export const Description = styled(Typography)(({ theme }) => ({
-  marginBottom: theme.spacing(2),
+  margin: theme.spacing(0.5, 0, 1, 0),
   color: "#000",
   fontWeight: 300,
-  fontSize: "1rem",
+  fontSize: "1.1rem",
   overflow: "hidden",
   display: "-webkit-box",
   WebkitBoxOrient: "vertical",
@@ -59,7 +55,7 @@ export const CardBottom = styled(Box)(({ theme }) => ({
 export const Price = styled(Typography)(({ theme }) => ({
   fontWeight: 400,
   color: "#000",
-  fontSize: "1rem",
+  fontSize: "1.3rem",
   [theme.breakpoints.down("sm")]: {
     fontSize: "0.85rem",
   },

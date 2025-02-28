@@ -181,13 +181,13 @@ export const StyledLink = styled(RouterLink)`
 `;
 
 export const ContinueShoppingButton = styled(Button)<{ theme?: Theme }>(({ theme }) => `
-  background-color: #F5EDEB;
+  background-color: #B8A29E;
   color: #000;
   font-weight: 300;
   text-transform: none;
   
   &:hover {
-    background-color: #FFC7CD;
+    background-color: #D1A6AC;
   }
   
   ${theme?.breakpoints.up('sm') ? `

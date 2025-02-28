@@ -1,5 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { Box, Typography } from '@mui/material';
+import theme from '../../theme/theme';
 
 export const AboutUsContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -49,7 +50,10 @@ export const ImagesContainer = styled(Box)(({ theme }) => ({
 export const RectImage = styled('img')(() => ({
   width: '80%',
   borderRadius: '8px',
-  objectFit: 'cover',
+
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+  },
 }));
 
 export const ArchImage = styled('img')(() => ({
