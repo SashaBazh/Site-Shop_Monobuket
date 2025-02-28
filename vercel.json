@@ -4,5 +4,12 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "https://api.monobuket.by/sitemap.xml",
+      "permanent": true
+    }
   ]
 }
