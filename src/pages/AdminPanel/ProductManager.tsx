@@ -263,70 +263,71 @@ const ProductManager: React.FC = () => {
   };
 
   const handleSaveProduct = async () => {
-    if (!originalProductData) return;
+  if (!originalProductData) return;
 
-    try {
-      setLoading(true);
+  try {
+    setLoading(true);
 
-      // Подготавливаем только измененные данные
-      const changedFields: Partial<ProductUpdateData> = {
-        id: editingProductId,
-      };
+    // Prepare the changed fields
+    const changedFields: Partial<ProductUpdateData> = {
+      id: editingProductId,
+    };
 
-      // Проверяем каждое поле на изменения
-      if (editingProductData.name !== originalProductData.name) {
-        changedFields.name = editingProductData.name;
-      }
-
-      if (editingProductData.price !== originalProductData.price.toString()) {
-        changedFields.price = editingProductData.price;
-      }
-
-      if (editingProductData.description !== originalProductData.description) {
-        changedFields.description = editingProductData.description;
-      }
-
-      if (
-        editingProductData.category_id !==
-        originalProductData.category_id.toString()
-      ) {
-        changedFields.category_id = editingProductData.category_id;
-      }
-
-      // Проверяем изменения в медиа-файлах
-      const mediaChanged =
-        originalMediaPaths.length !== originalProductData.media.length ||
-        media.length > 0;
-
-      // Если медиа изменились, добавляем их
-      if (mediaChanged) {
-        changedFields.media = media;
-      }
-
-      console.log("Измененные поля:", changedFields);
-
-      const submitFormData = new FormData();
-      submitFormData.append("product_data", JSON.stringify(changedFields));
-
-      // Добавляем новые файлы только если они есть
-      if (mediaChanged) {
-        media.forEach((file) => {
-          submitFormData.append("files", file);
-        });
-      }
-
-      await updateProduct(submitFormData);
-      setNotification({ message: "Товар успешно обновлен!", type: "success" });
-      fetchData();
-      setEditingProductId(null);
-      setOriginalProductData(null);
-    } catch (error) {
-      console.error("Ошибка обновления товара:", error);
-      setNotification({ message: "Ошибка обновления товара", type: "error" });
-    } finally {
-      setLoading(false);
+    // Check each field for changes
+    if (editingProductData.name !== originalProductData.name) {
+      changedFields.name = editingProductData.name;
     }
-  };
+
+    if (editingProductData.price !== originalProductData.price.toString()) {
+      changedFields.price = editingProductData.price;
+    }
+
+    if (editingProductData.description !== originalProductData.description) {
+      changedFields.description = editingProductData.description;
+    }
+
+    if (
+      editingProductData.category_id !==
+      originalProductData.category_id.toString()
+    ) {
+      changedFields.category_id = editingProductData.category_id;
+    }
+
+    // Create the form data
+    const submitFormData = new FormData();
+    submitFormData.append("product_data", JSON.stringify(changedFields));
+
+    // Only add media files if they've been changed
+    if (media.length > 0) {
+      changedFields.media = media;
+      
+      media.forEach((file) => {
+        submitFormData.append("files", file);
+      });
+    }
+
+    // Log the data being sent (for debugging)
+    console.log(
+      "Отправляемые данные товара:",
+      JSON.parse(submitFormData.get("product_data") as string)
+    );
+    console.log(
+      "Количество файлов для отправки:",
+      submitFormData.getAll("files").length
+    );
+
+    await updateProduct(submitFormData);
+    setNotification({ message: "Товар успешно обновлен!", type: "success" });
+    fetchData();
+    setEditingProductId(null);
+    setOriginalProductData(null);
+  } catch (error) {
+    console.error("Ошибка обновления товара:", error);
+    setNotification({ message: "Ошибка обновления товара", type: "error" });
+  } finally {
+    setLoading(false);
+  }
+};
 
   // Функция удаления товара
   const handleDeleteProduct = async (id: number) => {
