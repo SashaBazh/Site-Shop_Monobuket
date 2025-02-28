@@ -19,7 +19,7 @@ import {
   PriceOption,
   SortOption,
 } from "../../types/Filters.types";
-import { getCategories } from "../../api/adminAPI"; // Импортируем функцию getCategories
+import { getCategories } from "../../api/adminAPI";
 import {
   filterPanelContainer,
   searchBox,
@@ -54,7 +54,9 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [menuType, setMenuType] = useState<"price" | "sort" | "category">();
-  const [categories, setCategories] = useState<{ id: number; name: string }[]>([]); // Состояние для категорий
+  const [categories, setCategories] = useState<{ id: number; name: string }[]>(
+    []
+  );
 
   const open = Boolean(anchorEl);
 
@@ -62,7 +64,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
     const fetchCategories = async () => {
       try {
         const data = await getCategories();
-        setCategories(data); // Сохраняем категории в состояние
+        setCategories(data);
       } catch (error) {
         console.error("Ошибка при загрузке категорий:", error);
       }
@@ -90,7 +92,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
     } else if (menuType === "sort") {
       onSortByChange(value.toString());
     } else if (menuType === "category") {
-      onCategoryChange(Number(value)); // Преобразуем значение в ID категории
+      onCategoryChange(Number(value));
     }
     handleMenuClose();
   };
@@ -105,10 +107,6 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
             placeholder="Поиск..."
             value={searchValue}
             onChange={(e) => onSearchChange(e.target.value)}
-            InputProps={{
-              startAdornment: null,
-              disableUnderline: true,
-            }}
             sx={searchInput}
           />
         </Box>
@@ -146,16 +144,14 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
             </Tooltip>
           </Box>
 
-          <Box>
-            <Button
-              variant="contained"
-              size="small"
-              sx={clearFiltersButton}
-              onClick={onClearFilters}
-            >
-              Сбросить фильтры
-            </Button>
-          </Box>
+          <Button
+            variant="contained"
+            size="small"
+            sx={clearFiltersButton}
+            onClick={onClearFilters}
+          >
+            Сбросить фильтры
+          </Button>
         </Box>
       </Box>
 
@@ -179,14 +175,11 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
         anchorEl={anchorEl}
         open={open}
         onClose={handleMenuClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
         {menuType === "price" &&
           priceOptions.map((option) => (
             <MenuItem
               key={option.value}
-              selected={`${priceRange[0]}-${priceRange[1]}` === option.value}
               onClick={() => handleMenuItemClick(option.value)}
             >
               {option.label}
@@ -197,7 +190,6 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
           sortOptions.map((option) => (
             <MenuItem
               key={option.value}
-              selected={sortBy === option.value}
               onClick={() => handleMenuItemClick(option.value)}
             >
               {option.label}
@@ -208,8 +200,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
           categories.map((category) => (
             <MenuItem
               key={category.id}
-              selected={selectedCategory === category.id}
-              onClick={() => handleMenuItemClick(category.id)} // Передаем ID категории
+              onClick={() => handleMenuItemClick(category.id)}
             >
               {category.name}
             </MenuItem>
@@ -218,6 +209,5 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
     </>
   );
 };
-
 
 export default FilterPanel;

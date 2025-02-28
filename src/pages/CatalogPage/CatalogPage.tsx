@@ -135,6 +135,28 @@ export default function CatalogPage() {
     }
   };
 
+  const updateProducts = async (search: string, category: number | null) => {
+    setLoading(true);
+    setError(null);
+  
+    try {
+      let data;
+      if (category) {
+        data = await getProductsByCategory(category);
+
+      } else {
+        data = await getAllProducts();
+      }
+      setAllProducts(data);
+    } catch (error) {
+      console.error("Ошибка при обновлении товаров:", error);
+      setError("Не удалось обновить список товаров.");
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+
   const handleCardClick = (prodId: number) => {
     navigate(`/product/${prodId}`);
   };
@@ -175,13 +197,19 @@ export default function CatalogPage() {
 
         <FilterPanel
           searchValue={searchValue}
-          onSearchChange={setSearchValue}
+          onSearchChange={(value) => {
+            setSearchValue(value);
+            updateProducts(value, selectedCategory);
+          }}
           priceRange={priceRange}
           onPriceRangeChange={setPriceRange}
           sortBy={sortBy}
           onSortByChange={setSortBy}
           selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
+          onCategoryChange={(category) => {
+            setSelectedCategory(category);
+            updateProducts(searchValue, category);
+          }}
           bouquetTypes={bouquetTypes}
           onClearFilters={handleClearFilters}
         />
