@@ -8,7 +8,7 @@
   "redirects": [
     {
       "source": "/sitemap.xml",
-      "destination": "https://api.monobuket.by/api/sitemap.xml", 
+      "destination": "https://api.monobuket-mk.by/api/sitemap.xml", 
       "permanent": true
     }
   ]
