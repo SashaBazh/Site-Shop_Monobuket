@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /cart/
+Disallow: /checkout/
+Allow: /
+
+Sitemap: https://www.monobuket-mk.by/sitemap.xml
