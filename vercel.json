@@ -4,5 +4,11 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
+  ],
+  "routes": [
+    {
+      "src": "/sitemap.xml",
+      "dest": "https://api.monobuket.by/api/sitemap.xml"
+    }
   ]
 }
