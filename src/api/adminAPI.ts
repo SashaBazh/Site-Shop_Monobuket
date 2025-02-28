@@ -28,7 +28,7 @@ export async function getProductsAll() {
 }
 
 export async function createProduct(formData: FormData) {
-  const res = await axiosInstance.post("/products", formData);
+  const res = await axiosInstance.post("/products/", formData);
   return res.data;
 }
 
@@ -38,7 +38,7 @@ export async function deleteProduct(productId: number) {
 }
 
 export async function updateProduct(formData: FormData) {
-  const res = await axiosInstance.put("/products", formData);
+  const res = await axiosInstance.put("/products/", formData);
   return res.data;
 }
 
