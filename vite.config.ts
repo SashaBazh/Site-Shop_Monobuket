@@ -13,7 +13,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': '/src' // Удобные алиасы, если нужны 
+      '@': '/src' // Удобные алиасы, если нужны  
     }
   }
 });
