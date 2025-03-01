@@ -71,12 +71,13 @@ export const SectionTitle = styled(Typography)(({ theme }) => ({
 export const SectionTitle1 = styled(Typography)(({ theme }) => ({
   fontSize: "50px",
   fontWeight: 200,
-  margin: theme.spacing(1, 0),
   color: theme.palette.primary.main,
   paddingBottom: theme.spacing(1),
+  margin: '120px 0 0 0',
   [theme.breakpoints.down("sm")]: {
     fontSize: "40px",
   },
+
 }));
 
 export const Image = styled("img")(({ theme }) => ({

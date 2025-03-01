@@ -12,7 +12,10 @@ export const ProductContainer = styled(Box)(({ theme }) => ({
   paddingLeft: "5%",
   paddingRight: "5%",
   maxWidth: "1200px",
-  margin: "0 auto",
+  margin: '120px 0 0 0',
+  "@media (max-width: 900px)": {
+    margin: '110px 0 0 0',
+  },
 }));
 
 export const ImageContainer = styled(Box)(({ theme }) => ({

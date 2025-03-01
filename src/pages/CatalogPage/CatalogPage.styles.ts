@@ -8,6 +8,10 @@ export const CatalogContainer = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up("lg")]: {
     padding: theme.spacing(4, 6),
   },
+  margin: '120px 0 0 0',
+  "@media (max-width: 900px)": {
+    margin: '110px 0 0 0',
+  },
 }));
 
 export const CatalogTitle = styled(Typography)(({ theme }) => ({
