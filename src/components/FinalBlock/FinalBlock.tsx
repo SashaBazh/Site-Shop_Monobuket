@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 import {
   FinalBlockContainer,
   ImagesContainer,
@@ -9,16 +8,9 @@ import {
   Paragraph,
 } from "./FinalBlock.styles";
 
-const MotionFinalBlockContainer = motion(FinalBlockContainer);
-
 const FinalBlock: React.FC = () => {
   return (
-    <MotionFinalBlockContainer
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      viewport={{ once: true }}
-    >
+    <FinalBlockContainer>
       <ImagesContainer>
         <StyledImage src="./assets/images/final_rect.jpg" alt="final-rect" />
       </ImagesContainer>
@@ -38,7 +30,7 @@ const FinalBlock: React.FC = () => {
           этом доставка бесплатна при заказе от 120 рублей.
         </Paragraph>
       </TextContainer>
-    </MotionFinalBlockContainer>
+    </FinalBlockContainer>
   );
 };
 

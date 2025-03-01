@@ -1,7 +1,7 @@
 import axiosInstance from './axiosInstance';
 
 export async function getAllProducts() {
-  const res = await axiosInstance.get('/products/category/0'); 
+  const res = await axiosInstance.get('/products/category/0?limit=999'); 
   return res.data;
 }
 

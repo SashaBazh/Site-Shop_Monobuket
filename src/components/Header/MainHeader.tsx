@@ -18,9 +18,7 @@ import {
   NavRightContainer,
   NavLink,
   Logo,
-  Placeholder,
   DrawerContainer,
-  StyledAppBar,
 } from "./MainHeader.styles";
 
 const MainHeader: React.FC = () => {
@@ -47,7 +45,6 @@ const MainHeader: React.FC = () => {
 
   return (
     <>
-      <StyledAppBar>
         <MainHeaderContainer>
           <Link to="/">
             <Logo src="/assets/images/logo.png" alt="Logo" />
@@ -153,9 +150,6 @@ const MainHeader: React.FC = () => {
             </List>
           </DrawerContainer>
         </Drawer>
-      </StyledAppBar>
-
-      <Placeholder />
     </>
   );
 };

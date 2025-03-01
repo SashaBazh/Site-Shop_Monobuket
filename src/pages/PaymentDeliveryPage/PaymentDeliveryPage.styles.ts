@@ -15,7 +15,7 @@ const fadeIn = keyframes`
 
 // Контейнер страницы
 export const PageContainer = styled(Box)(() => ({
-  backgroundColor: "#E2DCD3",
+  backgroundColor: "#dcc7bd",
   minHeight: "100vh",
   display: "flex",
   flexDirection: "column",

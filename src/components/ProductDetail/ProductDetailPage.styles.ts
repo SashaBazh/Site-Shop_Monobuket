@@ -44,7 +44,7 @@ export const ProductTitle = styled(Typography)(({ theme }) => ({
   fontSize: "50px",
   fontWeight: 300,
   color: "#000",
-  marginBottom: "24px",
+  marginBottom: "10px",
   [theme.breakpoints.down("sm")]: {
     fontSize: "30px",
     textAlign: "center",
@@ -56,7 +56,7 @@ export const ProductDescription = styled(Typography)(({ theme }) => ({
   fontSize: "24px",
   fontWeight: 300,
   color: "#000",
-  marginBottom: "24px",
+  marginBottom: "10px",
   [theme.breakpoints.down("sm")]: {
     fontSize: "18px",
     textAlign: "center",

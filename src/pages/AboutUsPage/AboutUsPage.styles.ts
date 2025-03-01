@@ -141,4 +141,3 @@ export const CircleTextStyled = styled(Typography)({
     fontSize: "20px",
   },
 });
-

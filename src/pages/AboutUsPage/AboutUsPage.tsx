@@ -21,7 +21,6 @@ import { useInView } from 'react-intersection-observer';
 const AboutUsPage: React.FC = () => {
   const { ref: sectionRef1, inView: inViewSection1 } = useInView({ triggerOnce: true, threshold: 0.5 });
   const { ref: sectionRef2, inView: inViewSection2 } = useInView({ triggerOnce: true, threshold: 0.5 });
-  const { ref: sectionRef3, inView: inViewSection3 } = useInView({ triggerOnce: true, threshold: 0.5 });
 
   return (
     <PageWrapper>
@@ -77,18 +76,11 @@ const AboutUsPage: React.FC = () => {
         </ContentWrapper>
 
         <ContentWrapper>
-          <motion.div
-            ref={sectionRef3}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: inViewSection3 ? 1 : 0, y: inViewSection3 ? 0 : 50 }}
-            transition={{ duration: 1 }}
-          >
             <SubtitleText>Почему именно мы</SubtitleText>
             <MainText>
               В "Монобукете" мы уверены, что выбор букета требует такого же профессионального подхода, как и выбор автомобиля или дорогих украшений. Наши флористы-эксперты помогут вам создать именно ту цветочную композицию, которая идеально подойдет для вашего особенного случая.
             </MainText>
             <AboutImage1 src="/assets/images/about_image3.jpg" alt="about_image3" />
-          </motion.div>
         </ContentWrapper>
       </AboutContainer>
 

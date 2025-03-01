@@ -57,15 +57,15 @@ export const SectionTitle = styled(Typography)(() => ({
 
 export const SectionText = styled(Typography)(() => ({
   margin: "10px 0",
-  fontSize: "25px",
   fontWeight: 300,
   lineHeight: "1.5",
   textAlign: "left",
   maxWidth: "600px",
   marginLeft: "auto",
   marginRight: "auto",
-  "@media (max-width: 768px)": {
-    fontSize: "25px",
+  fontSize: "30px",
+  "@media (max-width: 600px)": {
+    fontSize: "18px",
   },
 }));
 

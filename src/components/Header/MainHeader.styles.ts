@@ -1,14 +1,22 @@
 import { styled } from "@mui/material/styles";
-import { Box, IconButton, AppBar, List } from "@mui/material";
+import { Box, IconButton, List } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export const MainHeaderContainer = styled(Box)(({ theme }) => ({
+  position: "fixed", // Фиксированное положение
+  top: 0, // Прикрепляем к верхней части
+  left: 0,
+  width: "100%", // Растягиваем на всю ширину
+  zIndex: 1000, // Делаем поверх остальных элементов
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  width: "100%",
+  backgroundColor: "#dcc7bd", // Фон, чтобы не просвечивал контент под ним
   padding: theme.spacing(1, 2),
+  // boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Легкая тень
 }));
+
+
 
 export const NavRightContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -30,26 +38,12 @@ export const NavLink = styled(Link)(({ theme }) => ({
 }));
 
 export const Logo = styled("img")(({ theme }) => ({
-  height: "50px",
+  height: "46px",
   objectFit: "contain",
   cursor: "pointer",
   [theme.breakpoints.down("sm")]: {
     height: "30px",
   },
-}));
-
-export const Placeholder = styled(Box)({
-  height: "70px",
-});
-
-export const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  position: "fixed",
-  elevation: 0,
-  backgroundColor: "#dcc7bd",
-  top: 0,
-  left: 0,
-  right: 0,
-  zIndex: theme.zIndex.drawer + 1,
 }));
 
 export const DrawerContainer = styled(Box)(({ theme }) => ({
@@ -60,7 +54,7 @@ export const DrawerContainer = styled(Box)(({ theme }) => ({
   height: "100%",
   paddingTop: theme.spacing(2),
   fontWeight: 300,
-  marginTop: "50px"
+
 }));
 
 export const DrawerCloseButton = styled(IconButton)(({ theme }) => ({
