@@ -6,10 +6,8 @@ export const SliderContainer = styled(Box)({
   overflow: "hidden",
   width: "100%",
   height: "75vh",
-  top: 120,
   "@media (max-width: 900px)": {
     height: "60vh",
-    top: 110,
   },
   "@media (max-width: 600px)": {
     height: "40vh",

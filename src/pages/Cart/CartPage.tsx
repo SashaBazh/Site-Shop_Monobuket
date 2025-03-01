@@ -58,14 +58,17 @@ const CartPage: React.FC = () => {
       <MainHeader />
       <SubHeader />
       <CartContainer>
-        <CartTitle>Ваша корзина</CartTitle>
+        <CartTitle>Ваша корзина — Магазин цветов Monobyket</CartTitle>
         {cartItems.length === 0 ? (
           <EmptyCartTypography>Корзина пуста</EmptyCartTypography>
         ) : (
           <Box>
             {cartItems.map((item) => (
               <CartItemRow key={item.id}>
-                <ProductImage src={getImageUrl(item.image)} alt={item.name} />
+                <ProductImage
+                  src={getImageUrl(item.image)}
+                  alt={`Изображение товара ${item.name} в корзине`}
+                />
                 <TextBlock>
                   <ProductName>{item.name}</ProductName>
                 </TextBlock>

@@ -24,10 +24,6 @@ export const PageContainer = styled(Box)(() => ({
   width: "100%",
   minHeight: "100vh",
   overflowX: "hidden",
-  margin: '120px 0 0 0',
-  "@media (max-width: 600px)": {
-    margin: '110px 0 0 0',
-  },
 }));
 
 export const ContactContainer = styled(Box)(({ theme }) => ({

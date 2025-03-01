@@ -144,6 +144,12 @@ const CheckoutPage: React.FC = () => {
 
   return (
     <StyledContainer maxWidth="md">
+      <head>
+        <title>Оформление заказа | Монобукет - Доставка цветов Минск</title>
+        <meta name="description" content="Оформление заказа на сайте Монобукет. Доставка цветов и подарков по Минску и области. Быстро, удобно, доступно!" />
+        <meta name="keywords" content="монобукет, цветы, доставка цветов, Минск, оформление заказа, подарки" />
+      </head>
+
       <PageTitle variant="h4">Оформление заказа</PageTitle>
 
       <OrderPaper>

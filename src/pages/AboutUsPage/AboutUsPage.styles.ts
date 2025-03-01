@@ -4,10 +4,6 @@ import { Box, Typography } from '@mui/material';
 export const AboutContainer = styled(Box)({
   width: '100%',
   textAlign: 'center',
-  margin: '120px 0 0 0',
-  "@media (max-width: 600px)": {
-    margin: '110px 0 0 0',
-  },
 });
 
 export const PageWrapper = styled(Box)({

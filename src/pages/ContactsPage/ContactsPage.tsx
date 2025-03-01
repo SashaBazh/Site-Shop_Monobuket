@@ -19,7 +19,6 @@ import {
   StyledList,
 } from "./ContactsPage.styles";
 
-
 const MotionSectionText = ({ children }: { children: React.ReactNode }) => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
@@ -45,7 +44,7 @@ const ContactPage: React.FC = () => {
         <ContactContainer>
           <ContentWrapper>
             <MotionSectionText>
-              <SectionTitle variant="h2">Контакты</SectionTitle>
+              <SectionTitle variant="h2">Контакты Monobyket — Магазин цветов в Минске</SectionTitle>
             </MotionSectionText>
 
             <Grid container spacing={4} justifyContent="center" alignItems="flex-start">
@@ -67,7 +66,8 @@ const ContactPage: React.FC = () => {
                 </MotionSectionText>
                 <MotionSectionText>
                   <SectionText>
-                    <strong>Instagram:</strong> <StyledLink href="https://www.instagram.com/monobuket_by_mk/">monobuket_by_mk</StyledLink>
+                    <strong>Instagram:</strong>{" "}
+                    <StyledLink href="https://www.instagram.com/monobuket_by_mk/">monobuket_by_mk</StyledLink>
                   </SectionText>
                 </MotionSectionText>
                 <MotionSectionText>
@@ -88,7 +88,7 @@ const ContactPage: React.FC = () => {
                 <ImageContainer>
                   <motion.img
                     src="./assets/images/contacts_image.jpg"
-                    alt="Контактное изображение"
+                    alt="Контактное изображение магазина Monobyket"
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
@@ -99,7 +99,7 @@ const ContactPage: React.FC = () => {
 
             <MapContainer>
               <iframe
-                title="Yandex Map"
+                title="Карта местоположения Monobyket — Магазин цветов"
                 src="https://yandex.ru/map-widget/v1/?ll=27.598719%2C53.942595&z=17&pt=27.598719,53.942595,pm2dgl"
               ></iframe>
             </MapContainer>

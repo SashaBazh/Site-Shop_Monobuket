@@ -11,10 +11,6 @@ export const CartContainer = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     padding: theme.spacing(2),
   },
-  margin: '120px 0 0 0',
-  "@media (max-width: 900px)": {
-    margin: '110px 0 0 0',
-  },
 }));
 
 export const CartTitle = styled(Typography)(({ theme }) => ({

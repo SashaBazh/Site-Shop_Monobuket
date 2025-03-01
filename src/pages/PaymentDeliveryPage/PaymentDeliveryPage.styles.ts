@@ -73,7 +73,6 @@ export const SectionTitle1 = styled(Typography)(({ theme }) => ({
   fontWeight: 200,
   color: theme.palette.primary.main,
   paddingBottom: theme.spacing(1),
-  margin: '120px 0 0 0',
   [theme.breakpoints.down("sm")]: {
     fontSize: "40px",
   },
