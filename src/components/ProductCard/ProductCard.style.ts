@@ -44,7 +44,7 @@ export const Description = styled(Typography)(({ theme }) => ({
   margin: theme.spacing(0.5, 0, 0, 0),
   color: "#000",
   fontWeight: 300,
-  fontSize: "1.2rem",
+  fontSize: "1.3rem",
   overflow: "hidden",
   display: "-webkit-box",
   WebkitBoxOrient: "vertical",
@@ -79,7 +79,6 @@ export const BuyButton = styled(Button)(({ theme }) => ({
   padding: theme.spacing(0.5, 2),
   fontSize: "1rem",
   fontWeight: 300,
-  borderRadius: "8px",
   "&:hover": {
     backgroundColor: "#333",
   },

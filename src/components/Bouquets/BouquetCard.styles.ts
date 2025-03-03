@@ -69,6 +69,7 @@ export const BuyButton = styled(Button)(({ theme }) => ({
   fontSize: "1rem",
   fontWeight: 300,
   borderRadius: "4px",
+  height: "30px",
   "&:hover": {
     backgroundColor: "#333",
   },
