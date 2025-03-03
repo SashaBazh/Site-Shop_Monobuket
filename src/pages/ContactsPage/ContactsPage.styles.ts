@@ -53,7 +53,11 @@ export const SectionTitle = styled(Typography)(() => ({
   margin: "20px 0",
   fontSize: "50px",
   fontWeight: 300,
+  "@media (max-width: 600px)": {
+    fontSize: "30px", // Измени значение по необходимости
+  },
 }));
+
 
 export const SectionText = styled(Typography)(() => ({
   margin: "10px 0",

@@ -33,7 +33,7 @@ export const Image = styled("img")(({ theme }) => ({
 }));
 
 export const Description = styled(Typography)(({ theme }) => ({
-  margin: theme.spacing(0.5, 0, 1, 0),
+  margin: theme.spacing(0.5, 0, 0, 0),
   color: "#000",
   fontWeight: 300,
   fontSize: "1.1rem",
@@ -42,7 +42,7 @@ export const Description = styled(Typography)(({ theme }) => ({
   WebkitBoxOrient: "vertical",
   WebkitLineClamp: 2,
   textOverflow: "ellipsis",
-  height: "1.2rem",
+  height: "1.5rem",
 }));
 
 export const CardBottom = styled(Box)(({ theme }) => ({
@@ -53,9 +53,9 @@ export const CardBottom = styled(Box)(({ theme }) => ({
 }));
 
 export const Price = styled(Typography)(({ theme }) => ({
-  fontWeight: 400,
+  fontWeight: 300,
   color: "#000",
-  fontSize: "1rem",
+  fontSize: "1.1rem",
   [theme.breakpoints.down("sm")]: {
     fontSize: "0.85rem",
   },

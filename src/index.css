@@ -80,3 +80,23 @@ footer {
   background-color: #333;
   color: white;
 }
+
+
+/* html {
+  scrollbar-color: #e4d2c7 #f1dee9; 
+  scrollbar-width: thin; 
+} */
+
+body::-webkit-scrollbar {
+  width: 6px; /* Ширина всего элемента навигации */
+}
+
+body::-webkit-scrollbar-track {
+  background: #f1dee9; /* Цвет дорожки */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #050c26; /* Цвет бегунка */
+  border-radius: 20px; /* Округление бегунка */
+  border: 3px solid #e1ac8c; /* Оформление границ бегунка */
+}

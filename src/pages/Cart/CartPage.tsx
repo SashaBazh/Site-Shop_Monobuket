@@ -59,11 +59,20 @@ const CartPage: React.FC = () => {
       <SubHeader />
       <CartContainer>
         <CartTitle>Ваша корзина — Магазин цветов Monobyket</CartTitle>
-        {cartItems.length === 0 ? (
-          <EmptyCartTypography>Корзина пуста</EmptyCartTypography>
-        ) : (
-          <Box>
-            {cartItems.map((item) => (
+        <Box>
+          {cartItems.length === 0 ? (
+            <Box sx={{ 
+              backgroundColor: "#E2DCD3", 
+              padding: 2, 
+              borderRadius: 2, 
+              marginBottom: 2, 
+              textAlign: "center",
+              py: 4
+            }}>
+              <EmptyCartTypography>Ваша корзина пуста</EmptyCartTypography>
+            </Box>
+          ) : (
+            cartItems.map((item) => (
               <CartItemRow key={item.id}>
                 <ProductImage
                   src={getImageUrl(item.image)}
@@ -117,39 +126,45 @@ const CartPage: React.FC = () => {
                   </DeleteIconButton>
                 </DeleteBox>
               </CartItemRow>
-            ))}
-            <Divider sx={{ my: 3 }} />
-            <TotalBox>
-              <TotalTypography>Итого:</TotalTypography>
-              <TotalTypography>{totalPrice} руб.</TotalTypography>
-            </TotalBox>
-            <ButtonsBox>
+            ))
+          )}
+          
+          <Divider sx={{ my: 3 }} />
+          
+          <TotalBox>
+            <TotalTypography>Итого:</TotalTypography>
+            <TotalTypography>{totalPrice} руб.</TotalTypography>
+          </TotalBox>
+          
+          <ButtonsBox>
+            {cartItems.length > 0 && (
               <CheckoutButton
                 variant="contained"
                 onClick={handleCheckout}
               >
                 Оформить заказ
               </CheckoutButton>
-              <StyledLink to="/catalog">
-                <ContinueShoppingButton variant="contained">
-                  Продолжить покупки
-                </ContinueShoppingButton>
-              </StyledLink>
-            </ButtonsBox>
-            <NoticeBox>
-              <NoticeTitle>
-                <strong>Обратите внимание:</strong>
-              </NoticeTitle>
-              <NoticeText>
-                1. Для успешного оформления заказа убедитесь, что все товары в
-                корзине правильно выбраны.
-              </NoticeText>
-              <NoticeText>
-                2. Убедитесь, что у вас есть актуальный адрес доставки.
-              </NoticeText>
-            </NoticeBox>
-          </Box>
-        )}
+            )}
+            <StyledLink to="/catalog">
+              <ContinueShoppingButton variant="contained">
+                Продолжить покупки
+              </ContinueShoppingButton>
+            </StyledLink>
+          </ButtonsBox>
+          
+          <NoticeBox>
+            <NoticeTitle>
+              <strong>Обратите внимание:</strong>
+            </NoticeTitle>
+            <NoticeText>
+              1. Для успешного оформления заказа убедитесь, что все товары в
+              корзине правильно выбраны.
+            </NoticeText>
+            <NoticeText>
+              2. Убедитесь, что у вас есть актуальный адрес доставки.
+            </NoticeText>
+          </NoticeBox>
+        </Box>
       </CartContainer>
       <Footer />
       <Snackbar

@@ -27,6 +27,9 @@ export const Title = styled(Typography)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     fontSize: '36px',
   },
+  "@media (max-width: 600px)": {
+    fontSize: "30px", // Измени значение по необходимости
+  },
 }));
 
 export const Paragraph = styled(Typography)(({ theme }) => ({

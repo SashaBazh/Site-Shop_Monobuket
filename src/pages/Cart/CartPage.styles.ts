@@ -25,8 +25,9 @@ export const CartTitle = styled(Typography)(({ theme }) => ({
 }));
 
 export const EmptyCartTypography = styled(Typography)(() => ({
-  fontSize: "1.2rem",
-  fontWeight: 300,
+  fontSize: "1.6rem",
+  fontWeight: 600,
+  color: "#666666 !important"
 }));
 
 export const CartItemRow = styled(Box)(({ theme }) => ({

@@ -64,12 +64,11 @@ export const CardBottom = styled(Box)(({ theme }) => ({
 }));
 
 export const Price = styled(Typography)(({ theme }) => ({
-  fontWeight: 400,
+  fontWeight: 300,
   color: "#000",
-  fontSize: "1.5rem",
-  margin: theme.spacing(0, 0),
+  fontSize: "1.3rem",
   [theme.breakpoints.down("sm")]: {
-    fontSize: "0.9rem",
+    fontSize: "0.85rem",
   },
 }));
 

@@ -76,6 +76,11 @@ export const SectionTitle1 = styled(Typography)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     fontSize: "40px",
   },
+  "@media (max-width: 600px)": {
+    fontSize: "30px", // Измени значение по необходимости
+    margin: theme.spacing(2, 0),
+  },
+  
 
 }));
 
