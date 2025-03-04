@@ -16,7 +16,6 @@ interface ProductManagerStylesType {
   deleteButton: CSSProperties;
   formGroup: CSSProperties;
   label: CSSProperties;
-  // Новые стили для отображения товаров в одну строку
   filterContainer: CSSProperties;
   filterItem: CSSProperties;
   filterLabel: CSSProperties;
@@ -33,7 +32,6 @@ interface ProductManagerStylesType {
   editFormRow: CSSProperties;
   editFormField: CSSProperties;
   editFormSection: CSSProperties;
-  // Стили для управления изображениями
   imageContainer: CSSProperties;
   deleteImageButton: CSSProperties;
   previewImage: CSSProperties;
@@ -42,13 +40,14 @@ interface ProductManagerStylesType {
 export const ProductManagerStyles: ProductManagerStylesType = {
   container: {
     padding: '1.5rem',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#ffffff', // Белый фон
     borderRadius: '0.5rem',
+    border: '1px solid #ddd', // Серая обводка
   },
   title: {
     fontSize: '1.25rem',
     fontWeight: 'bold',
-    color: '#1f2937',
+    color: '#000000', // Черный текст
     marginBottom: '1.5rem',
   },
   form: {
@@ -65,52 +64,54 @@ export const ProductManagerStyles: ProductManagerStylesType = {
   label: {
     fontSize: '1rem',
     fontWeight: 'bold',
-    color: '#1f2937',
+    color: '#000000', // Черный текст
   },
   input: {
     padding: '0.75rem',
     borderRadius: '0.375rem',
-    border: '1px solid #d1d5db',
+    border: '1px solid #ddd', // Серая обводка
     fontSize: '1rem',
-    backgroundColor: '#ffffff',
-    color: '#1f2937',
+    backgroundColor: '#ffffff', // Белый фон
+    color: '#000000', // Черный текст
     width: '100%',
   },
   textarea: {
     padding: '0.75rem',
     borderRadius: '0.375rem',
-    border: '1px solid #d1d5db',
+    border: '1px solid #ddd', // Серая обводка
     fontSize: '1rem',
-    backgroundColor: '#ffffff',
-    color: '#1f2937',
+    backgroundColor: '#ffffff', // Белый фон
+    color: '#000000', // Черный текст
     minHeight: '120px',
     width: '100%',
   },
   select: {
     padding: '0.75rem',
     borderRadius: '0.375rem',
-    border: '1px solid #d1d5db',
+    border: '1px solid #ddd', // Серая обводка
     fontSize: '1rem',
-    backgroundColor: '#ffffff',
-    color: '#1f2937',
+    backgroundColor: '#ffffff', // Белый фон
+    color: '#000000', // Черный текст
     width: '100%',
   },
   button: {
     padding: '0.75rem 1.5rem',
-    backgroundColor: '#2563eb',
-    color: '#ffffff',
-    border: 'none',
+    backgroundColor: '#777873', // Серый фон
+    color: '#000000', // Черный текст
+    border: '1px solid #ddd', // Серая обводка
     borderRadius: '0.375rem',
     cursor: 'pointer',
     fontSize: '1rem',
     transition: 'background-color 0.2s',
   },
   buttonDisabled: {
-    backgroundColor: '#d1d5db',
+    backgroundColor: '#f5f5f5', // Светло-серый фон
+    color: '#666666', // Серый текст
     cursor: 'not-allowed',
+    border: '1px solid #ddd', // Серая обводка
   },
   loadingMessage: {
-    color: '#6b7280',
+    color: '#666666', // Серый текст
   },
   productList: {
     listStyleType: 'none',
@@ -122,11 +123,11 @@ export const ProductManagerStyles: ProductManagerStylesType = {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '0.75rem 1rem',
-    borderBottom: '1px solid #e5e7eb',
+    borderBottom: '1px solid #ddd', // Серая обводка
   },
   deleteButton: {
-    backgroundColor: '#f87171',
-    color: '#ffffff',
+    backgroundColor: '#f87171', // Красный для акцента
+    color: '#ffffff', // Белый текст
     border: 'none',
     padding: '0.375rem 1rem',
     borderRadius: '0.375rem',
@@ -150,8 +151,8 @@ export const ProductManagerStyles: ProductManagerStylesType = {
     position: 'absolute',
     top: '2px',
     right: '2px',
-    backgroundColor: 'rgba(255, 0, 0, 0.7)',
-    color: 'white',
+    backgroundColor: 'rgba(255, 0, 0, 0.7)', // Красный для акцента
+    color: 'white', // Белый текст
     border: 'none',
     borderRadius: '50%',
     width: '20px',
@@ -170,7 +171,6 @@ export const ProductManagerStyles: ProductManagerStylesType = {
     height: '100px',
     objectFit: 'cover',
   },
-  // Новые стили для отображения в одну строку
   filterContainer: {
     marginBottom: '20px',
     display: 'flex',
@@ -184,12 +184,13 @@ export const ProductManagerStyles: ProductManagerStylesType = {
     display: 'block',
     marginBottom: '5px',
     fontWeight: 'bold',
+    color: '#000000', // Черный текст
   },
   productCard: {
     marginBottom: '15px',
-    border: '1px solid #e5e7eb',
+    border: '1px solid #ddd', // Серая обводка
     borderRadius: '8px',
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#ffffff', // Белый фон
     padding: '15px',
   },
   productInfoRow: {
@@ -207,11 +208,12 @@ export const ProductManagerStyles: ProductManagerStylesType = {
   },
   productInfoLabel: {
     fontWeight: 'bold',
-    color: '#4b5563',
+    color: '#000000', // Черный текст
     whiteSpace: 'nowrap',
   },
   productInfoValue: {
     fontSize: '16px',
+    color: '#000000', // Черный текст
   },
   productDescription: {
     display: 'flex',
@@ -232,8 +234,8 @@ export const ProductManagerStyles: ProductManagerStylesType = {
   },
   cancelButton: {
     padding: '0.75rem 1.5rem',
-    backgroundColor: '#888',
-    color: '#ffffff',
+    backgroundColor: '#888', // Серый фон
+    color: '#ffffff', // Белый текст
     border: 'none',
     borderRadius: '0.375rem',
     cursor: 'pointer',
@@ -242,7 +244,7 @@ export const ProductManagerStyles: ProductManagerStylesType = {
   },
   emptyMessage: {
     textAlign: 'center',
-    color: '#6b7280',
+    color: '#666666', // Серый текст
     padding: '20px',
   },
   editFormRow: {

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getOrders, updateOrderStatus } from "../../api/adminAPI";
-import { OrderManagerStyles } from "./OrderManager.styles";
+import useStyles from "./OrderManager.styles";
 import { Order, OrderStatus } from "../../types/Admin.types";
 
 const OrderManager: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
+  const classes = useStyles();
 
   useEffect(() => {
     async function fetchOrders() {
@@ -37,38 +38,40 @@ const OrderManager: React.FC = () => {
   if (loading) return <p>Загрузка заказов...</p>;
 
   return (
-    <div style={OrderManagerStyles.container}>
-      <h2 style={OrderManagerStyles.title}>Управление заказами</h2>
-      <table style={OrderManagerStyles.table}>
+    <div className={classes.container}>
+      <h2 className={classes.title}>Управление заказами</h2>
+
+      {/* Таблица для больших экранов */}
+      <table className={classes.table}>
         <thead>
           <tr>
-            <th style={OrderManagerStyles.th}>Имя заказчика</th>
-            <th style={OrderManagerStyles.th}>Email</th>
-            <th style={OrderManagerStyles.th}>Цена</th>
-            <th style={OrderManagerStyles.th}>Название букета</th>
-            <th style={OrderManagerStyles.th}>Дата</th>
-            <th style={OrderManagerStyles.th}>Способ получения</th>
-            <th style={OrderManagerStyles.th}>Статус</th>
+            <th className={classes.th}>Имя заказчика</th>
+            <th className={classes.th}>Email</th>
+            <th className={classes.th}>Цена</th>
+            <th className={classes.th}>Название букета</th>
+            <th className={classes.th}>Дата</th>
+            <th className={classes.th}>Способ получения</th>
+            <th className={classes.th}>Статус</th>
           </tr>
         </thead>
         <tbody>
           {orders.map((order) => (
             <tr key={order.id}>
-              <td style={OrderManagerStyles.td}>{order.sender_name}</td>
-              <td style={OrderManagerStyles.td}>{order.email || "—"}</td>
-              <td style={OrderManagerStyles.td}>{order.total_price} ₽</td>
-              <td style={OrderManagerStyles.td}>
+              <td className={classes.td}>{order.sender_name}</td>
+              <td className={classes.td}>{order.email || "—"}</td>
+              <td className={classes.td}>{order.total_price} ₽</td>
+              <td className={classes.td}>
                 {order.items.map((item) => item.product.name).join(", ")}
               </td>
-              <td style={OrderManagerStyles.td}>
+              <td className={classes.td}>
                 {new Date(order.created_at).toLocaleString()}
               </td>
-              <td style={OrderManagerStyles.td}>
+              <td className={classes.td}>
                 {order.delivery_address ? order.delivery_address : "Самовывоз"}
               </td>
-              <td style={OrderManagerStyles.td}>
+              <td className={classes.td}>
                 <select
-                  style={OrderManagerStyles.select}
+                  className={classes.select}
                   value={order.status}
                   onChange={(e) =>
                     handleStatusChange(order.id, e.target.value as OrderStatus)
@@ -85,6 +88,58 @@ const OrderManager: React.FC = () => {
           ))}
         </tbody>
       </table>
+
+      {/* Карточки для маленьких экранов */}
+      {orders.map((order) => (
+        <div key={order.id} className={classes.card}>
+          <div className={classes.cardItem}>
+            <span className={classes.cardLabel}>Имя заказчика:</span>
+            <span className={classes.cardValue}>{order.sender_name}</span>
+          </div>
+          <div className={classes.cardItem}>
+            <span className={classes.cardLabel}>Email:</span>
+            <span className={classes.cardValue}>{order.email || "—"}</span>
+          </div>
+          <div className={classes.cardItem}>
+            <span className={classes.cardLabel}>Цена:</span>
+            <span className={classes.cardValue}>{order.total_price} ₽</span>
+          </div>
+          <div className={classes.cardItem}>
+            <span className={classes.cardLabel}>Название букета:</span>
+            <span className={classes.cardValue}>
+              {order.items.map((item) => item.product.name).join(", ")}
+            </span>
+          </div>
+          <div className={classes.cardItem}>
+            <span className={classes.cardLabel}>Дата:</span>
+            <span className={classes.cardValue}>
+              {new Date(order.created_at).toLocaleString()}
+            </span>
+          </div>
+          <div className={classes.cardItem}>
+            <span className={classes.cardLabel}>Способ получения:</span>
+            <span className={classes.cardValue}>
+              {order.delivery_address ? order.delivery_address : "Самовывоз"}
+            </span>
+          </div>
+          <div className={classes.cardItem}>
+            <span className={classes.cardLabel}>Статус:</span>
+            <select
+              className={classes.select}
+              value={order.status}
+              onChange={(e) =>
+                handleStatusChange(order.id, e.target.value as OrderStatus)
+              }
+            >
+              {Object.values(OrderStatus).map((status) => (
+                <option key={status} value={status}>
+                  {status}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };

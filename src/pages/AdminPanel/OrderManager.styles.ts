@@ -1,46 +1,68 @@
-import { CSSProperties } from "react";
+import { makeStyles } from '@mui/styles';
 
-interface OrderManagerStylesType {
-  container: CSSProperties;
-  title: CSSProperties;
-  table: CSSProperties;
-  th: CSSProperties;
-  td: CSSProperties;
-  select: CSSProperties;
-}
-
-export const OrderManagerStyles: OrderManagerStylesType = {
+const useStyles = makeStyles({
   container: {
     padding: "1.5rem",
     backgroundColor: "#ffffff",
     borderRadius: "0.5rem",
+    border: "1px solid #ddd",
   },
   title: {
     fontSize: "1.25rem",
     fontWeight: "bold",
-    color: "#1f2937",
+    color: "#000000",
     marginBottom: "1.5rem",
   },
   table: {
     width: "100%",
     borderCollapse: "collapse",
     marginTop: "1rem",
+    "@media (max-width: 1200px)": {
+      display: "none",
+    },
   },
   th: {
-    backgroundColor: "#f3f4f6",
+    backgroundColor: "#f5f5f5",
     padding: "0.75rem",
     textAlign: "left",
-    borderBottom: "2px solid #d1d5db",
+    borderBottom: "2px solid #ddd",
+    color: "#000000",
   },
   td: {
     padding: "0.75rem",
-    borderBottom: "1px solid #e5e7eb",
+    borderBottom: "1px solid #ddd",
+    color: "#000000",
   },
   select: {
     padding: "0.375rem 0.75rem",
     borderRadius: "0.375rem",
-    border: "1px solid #d1d5db",
+    border: "1px solid #ddd",
     backgroundColor: "#ffffff",
     fontSize: "1rem",
+    color: "#000000",
+    cursor: "pointer",
   },
-};
+  card: {
+    display: "none",
+    border: "1px solid #ddd",
+    borderRadius: "0.5rem",
+    padding: "1rem",
+    marginBottom: "1rem",
+    backgroundColor: "#f5f5f5",
+    "@media (max-width: 1200px)": {
+      display: "block",
+    },
+  },
+  cardItem: {
+    marginBottom: "0.75rem",
+  },
+  cardLabel: {
+    fontWeight: "bold",
+    color: "#000000",
+  },
+  cardValue: {
+    color: "#000000",
+  },
+});
+
+export default useStyles;

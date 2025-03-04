@@ -15,72 +15,75 @@ interface CategoryManagerStylesType {
 }
 
 export const CategoryManagerStyles: CategoryManagerStylesType = {
-    container: {
-      padding: '1.5rem',
-      backgroundColor: '#ffffff',
-      borderRadius: '0.5rem',
-    },
-    title: {
-      fontSize: '1.25rem',
-      fontWeight: 'bold',
-      color: '#1f2937',
-      marginBottom: '1.5rem',
-    },
-    form: {
-      display: 'flex',
-      gap: '1rem',
-      marginBottom: '1.5rem',
-    },
-    input: {
-      flex: 1,
-      padding: '0.75rem',
-      borderRadius: '0.375rem',
-      border: '1px solid #d1d5db',
-      fontSize: '1rem',
-      backgroundColor: '#ffffff', // Добавляем белый фон
-      color: '#1f2937', // Цвет текста
-    },
-    button: {
-      padding: '0.75rem 1.5rem',
-      backgroundColor: '#2563eb',
-      color: '#ffffff',
-      border: 'none',
-      borderRadius: '0.375rem',
-      cursor: 'pointer',
-      fontSize: '1rem',
-      transition: 'background-color 0.2s',
-    },
-    buttonDisabled: {
-      backgroundColor: '#d1d5db',
-      cursor: 'not-allowed',
-    },
-    loadingMessage: {
-      color: '#6b7280',
-    },
-    list: {
-      listStyleType: 'none',
-      paddingLeft: '0',
-    },
-    listItem: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: '0.75rem 1rem',
-      borderBottom: '1px solid #e5e7eb',
-    },
-    deleteButton: {
-      backgroundColor: '#f87171',
-      color: '#ffffff',
-      border: 'none',
-      padding: '0.375rem 1rem',
-      borderRadius: '0.375rem',
-      cursor: 'pointer',
-      fontSize: '0.875rem',
-      transition: 'background-color 0.2s',
-    },
-    emptyMessage: {
-      color: '#6b7280',
-      textAlign: 'center',
-      fontSize: '1rem',
-    },
-  };  
+  container: {
+    padding: '1.5rem',
+    backgroundColor: '#ffffff', // Белый фон
+    borderRadius: '0.5rem',
+    border: '1px solid #ddd', // Серая обводка
+  },
+  title: {
+    fontSize: '1.25rem',
+    fontWeight: 'bold',
+    color: '#000000', // Черный текст
+    marginBottom: '1.5rem',
+  },
+  form: {
+    display: 'flex',
+    gap: '1rem',
+    marginBottom: '1.5rem',
+  },
+  input: {
+    flex: 1,
+    padding: '0.75rem',
+    borderRadius: '0.375rem',
+    border: '1px solid #ddd', // Серая обводка
+    fontSize: '1rem',
+    backgroundColor: '#ffffff', // Белый фон
+    color: '#000000', // Черный текст
+  },
+  button: {
+    padding: '0.75rem 1.5rem',
+    backgroundColor: '#777873',
+    color: '#000000',
+    border: '1px solid #ddd',
+    borderRadius: '0.375rem',
+    cursor: 'pointer',
+    fontSize: '1rem',
+    transition: 'background-color 0.2s',
+  },
+  buttonDisabled: {
+    backgroundColor: '#f5f5f5', // Светло-серый фон
+    color: '#666666', // Серый текст
+    cursor: 'not-allowed',
+    border: '1px solid #ddd', // Серая обводка
+  },
+  loadingMessage: {
+    color: '#666666', // Серый текст
+  },
+  list: {
+    listStyleType: 'none',
+    paddingLeft: '0',
+  },
+  listItem: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '0.75rem 1rem',
+    borderBottom: '1px solid #ddd', // Серая обводка
+  },
+  deleteButton: {
+    backgroundColor: '#f87171', // Красный для акцента
+    color: '#ffffff', // Белый текст
+    border: 'none',
+    padding: '0.375rem 1rem',
+    borderRadius: '0.375rem',
+    cursor: 'pointer',
+    fontSize: '0.875rem',
+    transition: 'background-color 0.2s',
+  },
+  emptyMessage: {
+    color: '#666666', // Серый текст
+    textAlign: 'center',
+    fontSize: '1rem',
+  },
+};

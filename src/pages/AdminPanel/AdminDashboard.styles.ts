@@ -1,139 +1,152 @@
-import { CSSProperties } from 'react';
+import { makeStyles } from "@mui/styles";
 
-interface AdminDashboardStylesType {
-  container: CSSProperties;
-  header: CSSProperties;
-  headerContent: CSSProperties;
-  headerTitle: CSSProperties;
-  userSection: CSSProperties;
-  userInfo: CSSProperties;
-  avatar: CSSProperties;
-  avatarText: CSSProperties;
-  mainContent: CSSProperties;
-  sidebar: CSSProperties;
-  sidebarNav: CSSProperties;
-  sidebarSectionTitle: CSSProperties;
-  tab: CSSProperties;
-  activeTab: CSSProperties;
-  tabIcon: CSSProperties;
-  tabText: CSSProperties;
-  contentArea: CSSProperties;
-  contentContainer: CSSProperties;
-}
-
-export const AdminDashboardStyles: AdminDashboardStylesType = {
+const useStyles = makeStyles({
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100vh',
-    backgroundColor: '#f9fafb'
+    display: "flex",
+    flexDirection: "column",
+    height: "100vh",
+    backgroundColor: "#fff", // Белый фон
+    color: "#000", // Черный текст
   },
   header: {
-    backgroundColor: '#ffffff',
-    boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-    padding: '1rem 1.5rem'
+    backgroundColor: "#f5f5f5", // Светло-серый фон
+    color: "#000", // Черный текст
+    padding: "16px",
+    display: "flex",
+    justifyContent: "center",
+    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Светлая тень
+    borderBottom: "1px solid #ddd", // Серая обводка
   },
   headerContent: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between'
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    maxWidth: "1200px",
   },
   headerTitle: {
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-    color: '#1f2937'
+    fontSize: "22px",
+    fontWeight: "bold",
+    color: "#000", // Черный текст
   },
   userSection: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '1rem'
+    display: "flex",
+    alignItems: "center",
   },
   userInfo: {
-    fontSize: '0.875rem',
-    color: '#4b5563'
+    marginRight: "12px",
+    fontSize: "14px",
+    color: "#666", // Серый текст
   },
   avatar: {
-    width: '2.5rem',
-    height: '2.5rem',
-    borderRadius: '9999px',
-    backgroundColor: '#2563eb',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
+    width: "40px",
+    height: "40px",
+    backgroundColor: "#ddd", // Светло-серый фон
+    color: "#000", // Черный текст
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "50%",
+    fontWeight: "bold",
+    fontSize: "16px",
+    border: "1px solid #ccc", // Серая обводка
   },
   avatarText: {
-    color: '#ffffff',
-    fontWeight: 'bold'
+    fontSize: "16px",
+    fontWeight: "bold",
+    color: "#000", // Черный текст
   },
   mainContent: {
-    display: 'flex',
+    display: "flex",
     flex: 1,
-    overflow: 'hidden'
+    backgroundColor: "#fff", // Белый фон
+    flexDirection: "row",
+    "@media (max-width: 768px)": {
+      flexDirection: "column",
+    },
   },
   sidebar: {
-    width: '16rem',
-    backgroundColor: '#ffffff',
-    boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
+    width: "260px",
+    backgroundColor: "#f5f5f5", // Светло-серый фон
+    padding: "16px",
+    boxShadow: "4px 0px 8px rgba(0, 0, 0, 0.1)", // Светлая тень
+    borderRight: "1px solid #ddd", // Серая обводка
+    "@media (max-width: 768px)": {
+      width: "100%",
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-around",
+      padding: "12px",
+    },
   },
   sidebarNav: {
-    marginTop: '1.5rem'
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+    "@media (max-width: 768px)": {
+      flexDirection: "row",
+      width: "100%",
+    },
   },
   sidebarSectionTitle: {
-    padding: '0.5rem 1.5rem',
-    fontSize: '0.75rem',
-    fontWeight: '600',
-    color: '#6b7280',
-    textTransform: 'uppercase'
+    fontWeight: "bold",
+    marginBottom: "12px",
+    fontSize: "14px",
+    color: "#666", // Серый текст
+    "@media (max-width: 768px)": {
+      display: "none",
+    },
   },
   tab: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0.75rem 1.5rem',
-    width: '100%',
-    textAlign: 'left',
-    color: '#4b5563',
-    transition: 'background-color 0.2s, color 0.2s',
-    border: 'none',
-    background: 'none',
-    cursor: 'pointer',
-    fontFamily: 'inherit',
-    fontSize: 'inherit'
-  },
-  activeTab: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0.75rem 1.5rem',
-    width: '100%',
-    textAlign: 'left',
-    color: '#2563eb',
-    backgroundColor: '#eff6ff',
-    borderLeft: '4px solid #2563eb',
-    transition: 'background-color 0.2s, color 0.2s',
-    borderTop: 'none',
-    borderRight: 'none',
-    borderBottom: 'none',
-    cursor: 'pointer',
-    fontFamily: 'inherit',
-    fontSize: 'inherit'
-  },
-  tabIcon: {
-    marginRight: '0.75rem',
-    width: '1.25rem',
-    height: '1.25rem'
+    padding: "12px",
+    backgroundColor: "#fff", // Белый фон
+    borderRadius: "8px",
+    border: "1px solid #ddd", // Серая обводка
+    cursor: "pointer",
+    textAlign: "left",
+    fontSize: "14px",
+    color: "#000", // Черный текст
+    transition: "0.3s",
+    "&:hover": {
+      backgroundColor: "#f5f5f5", // Светло-серый фон при наведении
+    },
+    "@media (max-width: 768px)": {
+      flex: 1,
+      textAlign: "center",
+    },
   },
   tabText: {
-    color: 'inherit'
+    fontSize: "14px",
+    fontWeight: "bold",
+    color: "#000", // Черный текст
+  },
+  activeTab: {
+    backgroundColor: "#ddd", // Светло-серый фон для активной вкладки
+    color: "#000", // Черный текст
+    fontWeight: "bold",
   },
   contentArea: {
     flex: 1,
-    padding: '1.5rem',
-    overflow: 'auto'
+    padding: "20px",
+    display: "flex",
+    justifyContent: "center",
+    "@media (max-width: 768px)": {
+      padding: "12px",
+    },
   },
   contentContainer: {
-    // backgroundColor: '#ffffff',
-    // borderRadius: '0.5rem',
-    // padding: '1.5rem',
-    // height: '100%',
-    // width: '100%'
-  }
-};
+    backgroundColor: "#fff", // Белый фон
+    padding: "24px",
+    borderRadius: "12px",
+    width: "100%",
+    maxWidth: "1500px",
+    "@media (max-width: 768px)": {
+      padding: "18px",
+    },
+    "@media (max-width: 480px)": {
+      padding: "14px",
+    },
+  },
+});
+
+export default useStyles;
