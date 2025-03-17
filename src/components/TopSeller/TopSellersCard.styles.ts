@@ -66,7 +66,7 @@ export const BuyButton = styled(Button)(({ theme }) => ({
   backgroundColor: "#443C41",
   color: "#fff",
   padding: theme.spacing(0.5, 2),
-  fontSize: "1.3rem",
+  fontSize: "1rem",
   fontWeight: 300,
   borderRadius: "4px",
   height: "30px",

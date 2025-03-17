@@ -73,7 +73,7 @@ const BouquetSection: React.FC = () => {
         )}
 
         <Grid container spacing={2} sx={gridContainerStyle}>
-          {products.map((product) => {
+          {products.slice(0, 6).map((product) => {
             const imagePath = product.media?.[0] || product.image;
             const imageUrl = getImageUrl(imagePath);
 

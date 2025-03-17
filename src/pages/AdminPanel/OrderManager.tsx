@@ -8,6 +8,14 @@ const OrderManager: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const classes = useStyles();
 
+  const statusTranslations: Record<OrderStatus, string> = {
+    pending: "В ожидании",
+    processing: "В обработке",
+    delivery: "Доставка",
+    completed: "Завершён",
+    cancelled: "Отменён",
+  };
+
   useEffect(() => {
     async function fetchOrders() {
       try {
@@ -22,7 +30,10 @@ const OrderManager: React.FC = () => {
     fetchOrders();
   }, []);
 
-  const handleStatusChange = async (orderId: number, newStatus: OrderStatus) => {
+  const handleStatusChange = async (
+    orderId: number,
+    newStatus: OrderStatus
+  ) => {
     try {
       await updateOrderStatus(orderId, newStatus);
       setOrders((prevOrders) =>
@@ -133,7 +144,7 @@ const OrderManager: React.FC = () => {
             >
               {Object.values(OrderStatus).map((status) => (
                 <option key={status} value={status}>
-                  {status}
+                  {statusTranslations[status]}
                 </option>
               ))}
             </select>

@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import TopSellersCard from "./TopSellersCard";
-import axiosInstance from "../../api/axiosInstance";
 import { useCart } from "../../context/CartContext";
 import { ProductType } from "../../types/TopSellersSection.types";
 import {
@@ -19,10 +18,11 @@ import {
   gridItemStyle,
 } from "./TopSellersSection.styles";
 import { getImageUrl } from "../../api/config";
+import { getAllProducts } from "../../api/productAPI";
 
 function getRandomProducts(products: ProductType[], count: number) {
-  const shuffled = [...products].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, count);
+  if (products.length <= count) return products;
+  return [...products].sort(() => Math.random() - 0.5).slice(0, count);
 }
 
 const TopSellersSection: React.FC = () => {
@@ -31,7 +31,6 @@ const TopSellersSection: React.FC = () => {
   const navigate = useNavigate();
   const { addItem } = useCart();
 
-  const [allProducts, setAllProducts] = useState<ProductType[]>([]);
   const [randomProducts, setRandomProducts] = useState<ProductType[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -40,25 +39,16 @@ const TopSellersSection: React.FC = () => {
     setLoading(true);
     (async () => {
       try {
-        const res = await axiosInstance.get<ProductType[]>(
-          "/products/category/0?limit=100"
-        );
-        setAllProducts(res.data);
+        const products = await getAllProducts();
+        setRandomProducts(getRandomProducts(products, 6));
       } catch (error) {
-        console.error("Ошибка при загрузке всех товаров:", error);
+        console.error("Ошибка при загрузке товаров:", error);
         setError("Не удалось загрузить топ продаж.");
       } finally {
         setLoading(false);
       }
     })();
   }, []);
-
-  useEffect(() => {
-    if (allProducts.length > 0) {
-      const sixRandom = getRandomProducts(allProducts, 6);
-      setRandomProducts(sixRandom);
-    }
-  }, [allProducts]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
