@@ -24,6 +24,10 @@ export const SectionTitle = styled(Typography)({
   margin: '20px 0',
   fontSize: '50px',
   fontWeight: '200',
+  boxSizing: 'border-box',
+  '@media (max-width: 768px)': {
+    fontSize: '30px',
+  },
 });
 
 export const SectionSubtitle = styled(Typography)({
