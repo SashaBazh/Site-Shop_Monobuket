@@ -308,11 +308,6 @@ const CheckoutPage: React.FC = () => {
                 control={<Radio />}
                 label="Наличными"
               />
-              <FormControlLabel
-                value="webpay"
-                control={<Radio />}
-                label="Картой"
-              />
             </RadioGroup>
           </FormControl>
         </OrderPaper>
